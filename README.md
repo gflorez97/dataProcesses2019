@@ -27,9 +27,9 @@ Discovery can be applied to NBA data
 - Data size: inmeasurable (multiple endpoints, with multiple types of queries).
 - Questions to answer:
 
-## Basketball referrence API
+## Basketball reference
 - URL: https://www.basketball-reference.com/
-- Description: this website includes also includes data from mostly every game played in NBA history. We will be using the nbastatR package to wrap the data from this website and get all the needed information for teams and players, specially the information not available from the NBA Stats API directly (missing values, advanced statistics only available in this web...).
+- Description: this website also includes data from mostly every game played in NBA history. We will be using the nbastatR package to wrap the data from this website and get all the needed information for teams and players, specially the information not available from the NBA Stats API directly (missing values, advanced statistics only available in this web...).
 - Data size: inmeasurable (multiple endpoints, with multiple types of queries).
 - Questions to answer:
 
