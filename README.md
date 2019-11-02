@@ -16,21 +16,25 @@ Discovery can be applied to NBA data
 - https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf: this paper describes a method for ranking NBA teams based on a number of factors. 
 
 ## Data-driven questions
--
--
--
+1) Who is the most consistent three-point shooter in NBA history?
+2)
+3)
 
 # Finding Data
 ## NBA Stats API
 - URL: https://stats.nba.com/
 - Description: this api includes data from mostly every game played in NBA history. We will be using the nbastatR package to access this API and get all the needed information for teams and players.
 - Data size: inmeasurable (multiple endpoints, with multiple types of queries).
-- Questions to answer:
+- Questions to answer: 1
 
 ## Basketball reference
 - URL: https://www.basketball-reference.com/
 - Description: this website also includes data from mostly every game played in NBA history. We will be using the nbastatR package to wrap the data from this website and get all the needed information for teams and players, specially the information not available from the NBA Stats API directly (missing values, advanced statistics only available in this web...).
 - Data size: inmeasurable (multiple endpoints, with multiple types of queries).
-- Questions to answer:
+- Questions to answer: 1
 
-##
+## NBA Players stats since 1950 (Kaggle dataset)
+- URL: https://www.kaggle.com/drgilermo/nba-players-stats/
+- Description: finally, a "proper" dataset from the kaggle website, which also includes NBA players stats. This dataset would be used in case we have any problem with the other two sources (like problems fetching data or with missing values), as data should be the same.
+- Data size: the main .csv (Seasons_stats) has 24691 observations and 53 features.
+- Questions to answer: 1
