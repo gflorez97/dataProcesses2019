@@ -5,7 +5,7 @@
 - Antonio González Sanz
 - Esaú García Sánchez-Torija
 - Adrián Rodríguez Socorro
--
+- Rafael Inés Guillén
 
 # Domain of interest
 The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States (the NBA).
