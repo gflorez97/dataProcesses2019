@@ -5,6 +5,7 @@
 - Antonio González Sanz
 - Esaú García Sánchez-Torija
 - Adrián Rodríguez Socorro
+-
 
 # Domain of interest
 The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States (the NBA).
@@ -31,18 +32,18 @@ Also, it's a sport that we usually watch and like being updated about the differ
 - Description: this API includes data from mostly every game played in NBA history.
 We will be using the `nbastatR` package to access this API and get all the needed information for teams and players.
 - Data size: immeasurable (multiple endpoints, with multiple types of queries).
-- Questions to answer: 1
+- Questions to answer: 1, 2, 3
 
 ## Basketball reference
 - URL: [www.basketball-reference.com](https://www.basketball-reference.com)
 - Description: this website also includes data from mostly every game played in NBA history.
 We will be using the `nbastatR` package to wrap the data from this website and get all the needed information for teams and players, specially the information not available from the NBA Stats API directly (missing values, advanced statistics only available in this web...).
 - Data size: immeasurable (multiple endpoints, with multiple types of queries).
-- Questions to answer: 1
+- Questions to answer: 1, 2, 3
 
 ## NBA Players stats since 1950 (Kaggle dataset)
 - URL: [www.kaggle.com/drgilermo/nba-players-stats](https://www.kaggle.com/drgilermo/nba-players-stats)
 - Description: finally, a _proper_ dataset from the Kaggle website, which also includes NBA players stats.
 This dataset would be used in case we have any problem with the other two sources (like problems fetching data or with missing values), as data should be the same.
 - Data size: the main CSV (`Seasons_stats`) has 24,691 observations and 53 features.
-- Questions to answer: 1
+- Questions to answer: 1, 2, 3
