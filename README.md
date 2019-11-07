@@ -4,12 +4,12 @@
 - Gonzalo Flórez Arias
 - Antonio González Sanz
 - Esaú García Sánchez-Torija
--
+- Adrián Rodríguez Socorro
 
 # Domain of interest
 The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States (the NBA).
-It is an interesting domain, as more and more data is available daily as games are played, and being able to analyze all that data properly is starting to become a priority for professional teams.
-Also, it's a sport we know about and like, and thus we can compare the results of our analysis to our previous knowledge.
+We have choosen this topic for different reasons, one of this it´s because nowadays we see it as an interesting domain, besides as more and more data is available daily as games are played, and being able to analyze all that data properly is starting to become a priority for professional teams.
+Also, it's a sport that we usually watch and like being updated about the different nba news, furthermore thus we can compare the results of our analysis to our previous knowledge and this will help us to understand better the keys to know more about what is hidden behind this sport. (It will be something similar to the film "moneyball")
 
 ## Previous works
 - https://www.cse.unr.edu/~sushil/class/ml/papers/local/nba.pdf: a relatively old (1996) paper describing how Data Mining and Knowledge Discovery can be applied to NBA data.
