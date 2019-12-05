@@ -14,14 +14,14 @@ library(gridExtra)
 library(formattable)
 library(corrplot)
 
-# Taking all NBA player stats, and getting the name without *
+# Taking all NBA player stats, and getting the name without * (to be able to join by name)
 nba.players <- as.data.frame(read.csv("./data/Seasons_Stats.csv", stringsAsFactors = FALSE, header = TRUE))
-#FALTA QUITAR EL * de los nombres para que el JOIN vaya bien
+nba.players$Player <- gsub("\\*", "", nba.players$Player)
 
 # Taking all players in any ALL NBA team
 all.nbaAPI <- all_nba_teams(return_message =TRUE)
 
-# Taking all players that appear in the NBA FIRST and SECOND team (ALL NBA)
+# Taking all players that appear in the NBA FIRST or SECOND team (ALL NBA)
 all.nbaAPI <- all.nbaAPI %>% 
   filter(isAllNBA1==TRUE | isAllNBA2==TRUE)
 
@@ -50,3 +50,4 @@ all.nbaFinal <- all.nbaFinal %>%
 
 # Saving the dataset
 write.csv(all.nbaFinal,"./data/nbaFinal.csv", row.names = TRUE)
+
