@@ -1,0 +1,15 @@
+- All NBA teams, predecir all nba
+- A partir del año que sea:
+    Nombre
+    Año
+    Puntos por partido
+    Porcentaje de tiro
+    Rebotes totales
+    Asistencias
+    Tapones
+    Faltas realizadas
+    Pérdidas
+    Robos
+    Minutos por partido
+    Posición
+    ALL NBA o no -> variable categórica
