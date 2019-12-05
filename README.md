@@ -14,8 +14,8 @@ Also, it's a sport that we usually watch and like being updated about the differ
 
 ## Previous works
 - [Paper from cse](https://www.cse.unr.edu/~sushil/class/ml/papers/local/nba.pdf): a relatively old (1996) paper describing how Data Mining and Knowledge Discovery can be applied to NBA data.
-- http://www.sloansportsconference.com/wp-content/uploads/2012/02/Goldsberry_Sloan_Submission.pdf: this paper includes a case study in which the author studies is who the best shooter in the NBA using game data from 2006 to 2011.
-- https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf: this paper describes a method for ranking NBA teams based on a number of factors.
+- [Paper from sloan sport conference](http://www.sloansportsconference.com/wp-content/uploads/2012/02/Goldsberry_Sloan_Submission.pdf): this paper includes a case study in which the author studies is who the best shooter in the NBA using game data from 2006 to 2011.
+- [Paper from degruyter](https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf): this paper describes a method for ranking NBA teams based on a number of factors.
 
 ## Data-driven questions
 <ol>
