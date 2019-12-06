@@ -15,7 +15,15 @@
 # Introduction and Related Work
 - Provides a clear motivation for answering a _specific_ data driven question of interest (**5 points**)
   
-...
+## Introduction
+Nowadays, stats are everywhere. They cover most aspects of life, enabling us to analyze any situation with just some numbers. They are also, of course, in sports. Specially in american sports, as it has been the norm for many years to gather any statistic that might be useful, hoping to obtain knowledge from it and being able to say how is each sport evolving and which young players should be scouted in order to try to predict who is going to be the new Jordan, the new Brady or the new Trout.
+
+The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States (the NBA). We have choosen this topic for different reasons: one of them is because nowadays we see it as an interesting domain,besides as more and more data is available daily as games are played, and being able to analyze all that data properly is starting to become a priority for professional teams. Also, it's a sport that we usually watch and like being updated about the different nba news, furthermore thus we can compare the results of our analysis to our previous knowledge and this will help us to understand better the keys to know more about what is hidden behind this sport. (It will be something similar to the film "Moneyball").
+
+We are, particularly, going to try to answer the following question: _**what makes a player be one of the 10 best players in the NBA in a particular year?**_
+
+For this, we have decided to focus in the All NBA selection. This annual selection consists in a voting, conducted by sportswriters and broadcasters throughout the United States and Canada, in which the best players of the season are selected. We are using the first and second all nba team, that is, the 10 best players in each year (regardless of the fact some positions might have better players than others, we are mostly getting 3-4 guards, 4-5 forwards and 1-3 centers per year).
+
 
 - Cites 5 _relevant_ pieces of relevant work (whatever format you choose is fine, including just a hyperlink) (**1 point each**)
 ## Previous works: 
@@ -29,7 +37,26 @@
 # Exploratory Data Analysis
 - Introduces the dataset by describing the origin (source) and structure (shape, relevant features) of the data being used (**5 points**)
 
-...
+For answering the question of interest, we needed two things: every NBA season for each player (Jordan at age 21, Jordan at age 22, Jordan at age 23...) with his main statistics, and whether that season resulted in a first or second all nba selection for that player. When starting this project, we proposed using a [Kaggle dataset](https://www.kaggle.com/drgilermo/nba-players-stats) that contained the stats we needed for every player, but it didn't contain any feature to know if that player had an all nba selection. Then, we used the R package [nbaStatR](https://github.com/abresler/nbastatR) to gather, from the [NBA API](https://stats.nba.com), a dataset with every player who was selected in any all nba team.
+
+After that, we used R to generate the final dataset we wanted. For this, we filtered the all nba selections with just players in either first or second all nba; we joined both datasets, after a bit of pre-processing, to obtain in the statistics dataset a new variable, isAllNBA, which will be the categorical variable on which we will base our analysis; we took only the columns we wanted, adapting some of the from the original because we wanted stats to be applied per game, and not per season. Finally, we wanted to just omit every NA value, as some of the stats used weren't collected until 1978. The source of all these stats are manual in-game annotations, dating back to 1950, and so statistics that were not tracked then, as the number of blocks, can't be tracked now.
+
+Our final dataset, included PONER LINK, consists of 19554 observations of 14 variables, which are:
+- **X**: just a nominal variable for each row.
+- **isAllNBA**: TRUE if that player in that season was a first or second all nba.
+- **Year**: the year of the season.
+- **Player**: the name of the player.
+- **Position**: the position played during that year by that player.
+- **Rebounds**: rebounds per game of that player (adjusted to integer numbers)
+- **Assists**: assists per game of that player (adjusted to integer numbers)
+- **Blocks**: blocks per game of that player (adjusted to integer numbers)
+- **Steals**: steals per game of that player (adjusted to integer numbers)
+- **Points**: points per game of that player (adjusted to integer numbers)
+- **Turnovers**: turnovers per game of that player (adjusted to integer numbers)
+- **FieldGoalPercentage**: ratio of made shots by total shots (adjusted to [0,1])
+- **Minutes**: minutes played per game of that player (adjusted to integer numbers)
+- **Fouls**: fouls commited per game of that player (adjusted to integer numbers)
+   
 
 
 - Creates 5 well designed and formatted graphics (**15 points**, 3 each)

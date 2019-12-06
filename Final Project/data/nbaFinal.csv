@@ -1,4 +1,4 @@
-"","isAllNBA","Year","Player","Position","Rebounds","Assists","Blocks","Steals","Points","Turnovers","FieldGoalPercentage","MinutesPerGame","FoulsPerGame"
+"","isAllNBA","Year","Player","Position","Rebounds","Assists","Blocks","Steals","Points","Turnovers","FieldGoalPercentage","Minutes","Fouls"
 "1",FALSE,1978,"Zaid Abdul-Aziz","PF-C",3,0,0,0,3,0,0.383,9,1
 "2",FALSE,1978,"Zaid Abdul-Aziz","C",7,1,0,0,4,1,0.231,12,2
 "3",FALSE,1978,"Zaid Abdul-Aziz","PF",2,0,0,0,3,0,0.426,9,1

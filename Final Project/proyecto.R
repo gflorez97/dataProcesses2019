@@ -37,11 +37,11 @@ all.nbaAPI$isAllNBA[is.na(all.nbaAPI$isAllNBA)] <- FALSE
 
 # Taking only the columns we are going to need. Most columns have to be adapted to the "per game" version (adjusting to integer)
 all.nbaFinal <- all.nbaAPI %>% 
-  transform(Points = PTS%/%G, MinutesPerGame = MP%/%G, FoulsPerGame = PF%/%G, 
+  transform(Points = PTS%/%G, Minutes = MP%/%G, Fouls = PF%/%G, 
             Rebounds = TRB%/%G, Assists = AST%/%G, Blocks = BLK%/%G, Steals = STL%/%G, Turnovers = TOV%/%G) %>% 
   select(isAllNBA, Year, Player, Position = Pos, Rebounds, 
          Assists, Blocks, Steals, Points, 
-         Turnovers, FieldGoalPercentage = FG., MinutesPerGame, FoulsPerGame)
+         Turnovers, FieldGoalPercentage = FG., Minutes, Fouls)
 
 # We will start from the 1978 season, as it is the first season with all data available
 all.nbaFinal <- all.nbaFinal %>% 
@@ -50,4 +50,20 @@ all.nbaFinal <- all.nbaFinal %>%
 
 # Saving the dataset
 write.csv(all.nbaFinal,"./data/nbaFinal.csv", row.names = TRUE)
+
+#####################
+
+library("plotly")
+library("tidyr")
+library("Hmisc")
+
+# Initial visualization
+nbaFinal <- as.data.frame(read.csv("./data/nbaFinal.csv", stringsAsFactors = FALSE, header = TRUE))
+
+nbaFinal %>% 
+  select(Points, Rebounds, Assists, Blocks, Steals, Turnovers, FieldGoalPercentage, Minutes, Fouls) %>% 
+  hist()
+
+# Make the plot interactive by passing it to Plotly's `ggplotly()` function
+ggplotly(plot)
 
