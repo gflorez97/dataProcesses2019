@@ -60,10 +60,18 @@ library("Hmisc")
 # Initial visualization
 nbaFinal <- as.data.frame(read.csv("./data/nbaFinal.csv", stringsAsFactors = FALSE, header = TRUE))
 
+#Graph1
 nbaFinal %>% 
   select(Points, Rebounds, Assists, Blocks, Steals, Turnovers, FieldGoalPercentage, Minutes, Fouls) %>% 
   hist()
 
-# Make the plot interactive by passing it to Plotly's `ggplotly()` function
-ggplotly(plot)
+#Graph2
+ggplot(data = nbaFinal, mapping = aes(x = FieldGoalPercentage, y = Points)) +
+  geom_point(alpha = 1, aes(color = Minutes)) +
+  ggtitle("Plot of Points by FieldGoalPercentage, colored by Minutes")
+
+#Standard deviation in Field Goal Percentage for less and more than 20 minutes per game
+nbaFinal %>% filter(Minutes < 20) %>% select(FieldGoalPercentage) %>% apply(MARGIN=2, FUN=sd)
+nbaFinal %>% filter(Minutes >= 20) %>% select(FieldGoalPercentage) %>% apply(MARGIN=2, FUN=sd)
+
 

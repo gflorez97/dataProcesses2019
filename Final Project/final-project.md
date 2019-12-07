@@ -29,7 +29,7 @@ For this, we have decided to focus in the All NBA selection. This annual selecti
 ## Previous works: 
 - [Bhandari, Colet, Parker, Pines, Pratap, Ramanujam (1997). Advanced Scout: Data Mining and Knowledge Discovery in NBA Data. Data Mining and Knowledge Discovery, 1, pp.121–125.](https://www.cse.unr.edu/~sushil/class/ml/papers/local/nba.pdf)
 - [Goldsberry (2012). CourtVision: New Visual and Spatial Analytics for the NBA. MIT Sloan Sports Analytics Conference](http://www.sloansportsconference.com/wp-content/uploads/2012/02/Goldsberry_Sloan_Submission.pdf)
-- [Mikołajec Maszczyk, Zając (2013). Game Indicators Determining Sports Performance in the NBA. Journal of Human Kinetics, 37, 145-151](https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf)
+- [Mikołajec, Maszczyk, Zając (2013). Game Indicators Determining Sports Performance in the NBA. Journal of Human Kinetics, 37, 145-151](https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf)
 - ...
 - ...
 
@@ -64,9 +64,20 @@ Our final dataset, included PONER LINK, consists of 19554 observations of 14 var
   - Written interpretation of graphic is provided (**1 point**)
   - Clear axis labels, titles, and legends are included, where appropriate (**1 point**)
 
+
+We present below 5 graphics to illustrate our dataset:
+
+
+![Graph 1: Histograms of features](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png "Graph 1: Histograms of features")
+
+These histograms represent, at a glance, how our features are distributed. We can see Points, Rebounds, Assists, Blocks, Steals and Turnovers are left-skewed distributions, as most players are in the lower-end of all those stats, and just the best players in each area (except for Turnovers, which is a negative stat) peak with the greater values. The Field Goal Percentage seems to follow a normal distribution, with a mean of **0.44**, and some obvious outliers in 0 and 1 (in most cases, asociated with players that played just a few minutes in a season, and probably shot just 1 or 2 times and either scored or failed those shots). The Fouls feature tells us most players commit 1 or 2 fouls per game, and the Minutes feature is more evenly distributed, as there are more or less the same number of key players as role players and occasional players in the league.
+
+
+![Graph 2: Points by FieldGoalPercentage, colored by Minutes](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png "Graph 2: Points by FieldGoalPercentage, colored by Minutes")
+
+We already supposed the players that played more minutes usually scored more. This plot confirms this, while also telling us that Field Goal Percentage tends to the mean when players play lots of minutes: for players with less than 20 minutes per game (role players or occasional players), the percentage has a higher standard deviation (**0.12**),  than for players with more than 20 minutes per game (**0.05**).
+
 ...
-
-
   
 # Methods
 
