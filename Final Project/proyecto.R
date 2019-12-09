@@ -97,12 +97,15 @@ nbaFinal %>% filter(Minutes >= 20) %>% select(FieldGoalPercentage) %>% apply(MAR
 
 # Graph 3 #Over the original dataset with all players
 library(DataExplorer)
-plot_missing(all.nbaFinal, geom_label_args = list("size" = 3, "label.padding" = unit(0.3, "lines")))
+plot_missing(all.nbaFinal, geom_label_args = list("size" = 3, "label.padding" = unit(0.3, "lines")),group = list("Perfect" = 0, "Valid" = 0.06, "No valid" = 1))+ labs(y="N. Missing Values",x="Value", title ="Missing Values") + theme_light()
 
-library(DataExplorer)
-plot_missing(all.nbaFinal, geom_label_args = list("size" = 3, "label.padding" = unit(0.3, "lines")),
-             group = list("Perfect" = 0, "Valid" = 0.06, "No valid" = 1))+ 
-              labs(y="N. Missing Values",x="Value", title ="Missing Values") + theme_light()
+all.nbaFinal2 = all.nbaFinal[!duplicated(all.nbaFinal$Year),]
+all.nbaFinal2$na_count <- apply(all.nbaFinal2, 1, function(x) sum(is.na(x)))
+all.nbaFinal2 <- all.nbaFinal2[!is.na(all.nbaFinal2$Year), ]
+
+ggplot(data=all.nbaFinal2, aes(x=Year, y=na_count, colour = factor(na_count))) + geom_point() +
+  labs(y="Missing Values", x="Year", colour="Missing Values", title="Number of Missing values per year") + 
+  theme_light()
 
 # Graph 4
 ggarrange(ggplot(data = nbaFinal) +

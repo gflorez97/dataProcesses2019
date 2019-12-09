@@ -82,6 +82,8 @@ We already supposed the players that played more minutes usually scored more. Th
 
 In this graph we obtain the percentage of values which are not available in the original dataset (the one dating back from 1950). As we can see, the position of the player or if he was an all nba is something that has been collected since them, but some game stats, like blocks or turnovers, where not computed until recent years, and thus should not be valid if we used the whole dataset. In the worst case, Turnovers, we are losing a 20% of the total number of players in the history of NBA, which doesn't sound too bad, all things considered. As we already stated, the first year we consider in our cleaned dataset is 1978.
 
+![Graph 3_2: Number of missing variables per year](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png "Graph 3_2: Number of missing variables per year")
+In this case, we can observe the years in which the last variables started to appear. Until the 70's, the last two features where still not present.
 
 ![Graph 4: Violin plot of the main features](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png "Graph 4: Violin plot of the main features")
 
