@@ -41,7 +41,7 @@ For answering the question of interest, we needed two things: every NBA season f
 
 After that, we used R to generate the final dataset we wanted. For this, we filtered the all nba selections with just players in either first or second all nba; we joined both datasets, after a bit of pre-processing, to obtain in the statistics dataset a new variable, isAllNBA, which will be the categorical variable on which we will base our analysis; we took only the columns we wanted, adapting some of the from the original because we wanted stats to be applied per game, and not per season. Finally, we wanted to just omit every NA value, as some of the stats used weren't collected until 1978. The source of all these stats are manual in-game annotations, dating back to 1950, and so statistics that were not tracked then, as the number of blocks, can't be tracked now.
 
-Our final dataset, included PONER LINK, consists of 19554 observations of 14 variables, which are:
+Our final dataset, that can be viewed PONER LINK, consists of 19554 observations of 14 variables, which are:
 - **X**: just a nominal variable for each row.
 - **isAllNBA**: TRUE if that player in that season was a first or second all nba.
 - **Year**: the year of the season.
@@ -100,7 +100,44 @@ The appropriate methods are employed to answer the question of interest, includi
 
 ## Prediction
 
+The idea now is to be able to predict if a player season is one of the 10 best in the league, using our features. This is a classification problem, in which there are two classes (TRUE and FALSE). We will directly use the cleaned dataset without modifications, as we already handled missing values in previous sections.
+
+First, we treat our isAllNBA variable as a factor (this is going to be the only categorical variable we are using), and create a data partition to split our data into testing and training data. We decided to use 80% for training and 20% for test, which is a reasonable partition for our dataset size.
+```{r}
+nbaFinal$isAllNBA <- factor(nbaFinal$isAllNBA)
+
+trainIndex <- createDataPartition(nbaFinal$isAllNBA,
+                                  p = .8,
+                                  list = FALSE,
+                                  times = 1)
+
+training_set <- nbaFinal[ trainIndex, ]
+test_set <- nbaFinal[ -trainIndex, ]
+```
+
+Now that we have our training and test set, we prepare our train function (we will use the train function from the caret package). For this, we need to declare that we are using cross validation (with 10 folds) for training:
+```{r}
+fitControl <- trainControl(
+  method = "cv",
+  number = 10,
+  savePredictions = TRUE
+)
+```
+
+A grid parameter is also used used for each technique, in order to optimize the parameters each machine learning technique uses. For example, for the K-nearest neighbors:
+```{r}
+grid <- expand.grid(k = 1:20)
+```
+
+Moving forward, we present the algorithms we have used for this machine learning section:
+
+### K-nearest neighbors
+
 ...
+
+### Decision tree
+In this case we didn't use the training-test partition, nor we tried to generate the best machine learning model. The idea was to apply a decision tree algorithm to be able to visually get a glance at how this algorithm discriminate between the best players and the rest. In the result section we present a visualization of that tree, and try to interpret it.
+
 
 # Results
 You must provide a clear interpretation of your statistical and machine learning results, including at least **one visual or table** for each.

@@ -127,7 +127,7 @@ ggplot(data = fit_prediction$results) +
 
 
 #LMT
-
+nbaFinal$isAllNBA <- factor(nbaFinal$isAllNBA)
 grid <- expand.grid(iter = 1:5)
 
 fit_prediction <- train(
@@ -150,10 +150,10 @@ ggplot(data = fit_prediction$results) +
   geom_line(mapping = aes(x = k, y = Accuracy))
 
 
-# Decision tree
-
+# Decision tree (just for showing, no training-test division)
+nbaFinal$isAllNBA <- factor(nbaFinal$isAllNBA)
 library(rpart)
 library(rpart.plot)
-tree <- rpart(isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes, data=nbaFinal, cp=.02) #cp: complexity degree
+tree <- rpart(isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes, data=nbaFinal, cp=.01) #cp: complexity degree
 # Visualize the decision trees
 rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE)
