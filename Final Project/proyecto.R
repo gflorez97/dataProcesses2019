@@ -53,25 +53,107 @@ write.csv(all.nbaFinal,"./data/nbaFinal.csv", row.names = TRUE)
 
 #####################
 
-library("plotly")
-library("tidyr")
-library("Hmisc")
+library(plotly)
+library(tidyr)
+library(Hmisc)
+library(car)
+library(lmtest)
+library(tseries)
+library(tibble)
+library(caret)
 
 # Initial visualization
 nbaFinal <- as.data.frame(read.csv("./data/nbaFinal.csv", stringsAsFactors = FALSE, header = TRUE))
 
-#Graph1
+# Graph1
 nbaFinal %>% 
   select(Points, Rebounds, Assists, Blocks, Steals, Turnovers, FieldGoalPercentage, Minutes, Fouls) %>% 
   hist()
 
-#Graph2
+# Graph2
 ggplot(data = nbaFinal, mapping = aes(x = FieldGoalPercentage, y = Points)) +
   geom_point(alpha = 1, aes(color = Minutes)) +
   ggtitle("Plot of Points by FieldGoalPercentage, colored by Minutes")
 
-#Standard deviation in Field Goal Percentage for less and more than 20 minutes per game
+# Standard deviation in Field Goal Percentage for less and more than 20 minutes per game
 nbaFinal %>% filter(Minutes < 20) %>% select(FieldGoalPercentage) %>% apply(MARGIN=2, FUN=sd)
 nbaFinal %>% filter(Minutes >= 20) %>% select(FieldGoalPercentage) %>% apply(MARGIN=2, FUN=sd)
 
+#...
 
+# Linear model
+model = lm(isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes, data=nbaFinal)
+summary(model)
+outlierTest(model)
+plot(model, which=c(1:4), ask=F)
+
+
+# Prediction
+#K Nearest Neighbors
+
+nbaFinal$isAllNBA <- factor(nbaFinal$isAllNBA)
+trainIndex <- createDataPartition(nbaFinal$isAllNBA,
+                                  p = .8,
+                                  list = FALSE,
+                                  times = 1)
+training_set <- nbaFinal[ trainIndex, ]
+test_set <- nbaFinal[ -trainIndex, ]
+
+fitControl <- trainControl(
+  method = "cv",
+  number = 10,
+  savePredictions = TRUE
+)
+grid <- expand.grid(k = 1:20)
+
+fit_prediction <- train(
+  isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes,
+  data = training_set,
+  method = "knn",
+  trControl = fitControl,
+  tuneGrid = grid,
+  preProcess = "range"
+)
+
+# Make predictions on the test set
+fit_cv_grid_pp_preds <- predict(fit_prediction, test_set)
+
+# Assess performance via a confusion matrix
+confusionMatrix(test_set$isAllNBA, fit_cv_grid_pp_preds)
+
+# Show the average performance (across folds) for each value of `k`
+ggplot(data = fit_prediction$results) +
+  geom_line(mapping = aes(x = k, y = Accuracy))
+
+
+#LMT
+
+grid <- expand.grid(iter = 1:5)
+
+fit_prediction <- train(
+  isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes,
+  data = training_set,
+  method = "LMT",
+  trControl = fitControl,
+  tuneGrid = grid,
+  preProcess = "range",
+)
+
+# Make predictions on the test set
+fit_cv_grid_pp_preds <- predict(fit_prediction, test_set)
+
+# Assess performance via a confusion matrix
+confusionMatrix(test_set$isAllNBA, fit_cv_grid_pp_preds)
+
+# Show the average performance (across folds) for each value of `k`
+ggplot(data = fit_prediction$results) +
+  geom_line(mapping = aes(x = k, y = Accuracy))
+
+
+# Decision tree
+
+library(rpart)
+library(rpart.plot)
+tree <- rpart(isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes, data=nbaFinal, cp=.02) #cp: complexity degree
+# Visualize the decision trees
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE)
