@@ -145,17 +145,22 @@ A grid parameter is also used used for each technique, in order to optimize the 
 grid <- expand.grid(k = 1:20)
 ```
 
+The model used in this section uses the following features:
+```{r}
+isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes
+```
+
 Moving forward, we present the algorithms we have used for this machine learning section:
 
 ### K-nearest neighbors
 
-...
+The K-nearest neighbors algorithm is one of the most used machine learning techniques for classification. The parameter to be optimized is k, the number of neighbors (nearest from the data to predict) selected in order to try to estimate the class of the data.
 
 ### Decision tree
 The idea now was to apply a decision tree algorithm to be able to visually get a glance at how this algorithm discriminate between the best players and the rest. In the result section we present a visualization of that tree, and try to interpret it, along with the prediction results.
 
-### 
-...
+### Random forest
+Lastly, we tried to expand the decision tree algorithm and use a random forest. However, due to the high number of elements in our dataset, we couldn't train a big model unless we limited ourselves to a smaller dataset, from which, as will be presented in the following section, the results were worse than expected.
 
 
 # Results
@@ -169,15 +174,117 @@ You must provide a clear interpretation of your statistical and machine learning
 
 ## Prediction
 
+After presenting the trained models to the test set to predict, we obtained the following results:
+
 ### K-nearest neighbors
 
-...
+We compute the confusion matrix and generate some basic statistics to better analyze the results:
+
+```{r}
+Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE TRUE
+     FALSE  3812   18
+     TRUE     35   45
+                                          
+               Accuracy : 0.9864          
+                 95% CI : (0.9823, 0.9898)
+    No Information Rate : 0.9839          
+    P-Value [Acc > NIR] : 0.11172         
+                                          
+                  Kappa : 0.6226          
+                                          
+ Mcnemar's Test P-Value : 0.02797         
+                                          
+            Sensitivity : 0.9909          
+            Specificity : 0.7143          
+         Pos Pred Value : 0.9953          
+         Neg Pred Value : 0.5625          
+             Prevalence : 0.9839          
+         Detection Rate : 0.9749          
+   Detection Prevalence : 0.9795          
+      Balanced Accuracy : 0.8526  
+```
+
+In our case, as this is a classification problem, we are mostly looking at the accuracy (or the confidence intervals for it), the sensitivity and the specificity. The accuracy is really good: 3857 of 3910 players were correctly predicted, and most of the errors were all nba players predicted as not all nba players (logical, as there are way more FALSE than TRUE, the model tends to select more FALSE). Sensitivity, in this case, refers to the number of predicted FALSE players divided by the total real number of FALSE players: it states how well our model predict a player is not an all nba, taking into account all the players that really are all nba. On the other hand, the specificity refers to the number of predicted TRUE players, divided by the correct total of TRUE players. This number is smaller, which means some TRUE players were predicted as FALSE. This is also logical, as there are less training cases of TRUE players, the model fails sometimes to detect a player as TRUE.
+
+Let's see the evolution of the k parameter, which was tuned used a grid search:
+
+![k parameter evolution](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png "k parameter evolution")
+
+The best accuracy is obtained at k=9, but the difference is really small between this and other values. It seems clear 1 and 2 are not the best values in this case, but any of the others result in similar results.
+
 
 ### Decision tree
-...
+In this case, along with the prediction, we wanted to obtain a visual of a tree to illustrate the strength of this model, and how it discretizes between the two possible classes. We got the following tree:
 
-### 
-...
+![Decision Tree](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictionTree.png "Decision Tree")
+
+This gives us some key clues about our data. The first discriminant feature is Points: if a player scored more than 23, he is most likely to be an all nba (the more blue, the more likely to select TRUE, and viceversa for red), and if he scored more than 27, even more; finally, TRUE will be considered if there were more than 5 rebounds. Let's study another path: for players with less than 23 points, assist number is heavily weighted: if they have less than 10 (that is, not scorer players who aren't also great passers) they are most probably not an all nba. But, if they are good passers, the decision divides between more or less than 14 points: the tree tell us less than 14 points is a really low number, even for a non mainly scorer (like a playmaking point guard), and thus he is probably not an all nba.
+
+```{r}
+Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE TRUE
+     FALSE  3813   17
+     TRUE     38   42
+                                          
+               Accuracy : 0.9859          
+                 95% CI : (0.9817, 0.9894)
+    No Information Rate : 0.9849          
+    P-Value [Acc > NIR] : 0.329154        
+                                          
+                  Kappa : 0.5973          
+                                          
+ Mcnemar's Test P-Value : 0.007001        
+                                          
+            Sensitivity : 0.9901          
+            Specificity : 0.7119          
+         Pos Pred Value : 0.9956          
+         Neg Pred Value : 0.5250          
+             Prevalence : 0.9849          
+         Detection Rate : 0.9752          
+   Detection Prevalence : 0.9795          
+      Balanced Accuracy : 0.8510 
+```
+
+There are no major changes between this and the k-nearest neighbor, neither in the accuracy nor in the sensitivity or specificity.
+
+
+### Random forest
+
+In this case, the model is not able to correctly adjust to what we want.
+
+```{r}
+Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE  TRUE
+     FALSE 18962     0
+     TRUE    396     0
+                                          
+               Accuracy : 0.9795          
+                 95% CI : (0.9774, 0.9815)
+    No Information Rate : 1               
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0               
+                                          
+ Mcnemar's Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.9795          
+            Specificity :     NA          
+         Pos Pred Value :     NA          
+         Neg Pred Value :     NA          
+             Prevalence : 1.0000          
+         Detection Rate : 0.9795          
+   Detection Prevalence : 0.9795          
+      Balanced Accuracy :     NA          
+```
+
+Why, if the accuracy is still high? Because now every value is assigned to FALSE. By that, most of the data is correctly classified, as there are way more FALSE than TRUE, but this only assumes that any player is not an all nba, which is a dull prediction. We guess this happens because of the reduced training set, or because this algorithm can't fit well our model with the parameters selected (we used the 'cforest' method from the caret package).
 
 # Discussion and Future Work
 Based on _specific observations_ from the results section, the report clearly provides:

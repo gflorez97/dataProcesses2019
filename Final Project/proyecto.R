@@ -171,7 +171,8 @@ confusionMatrix(test_set$isAllNBA, fit_cv_grid_pp_preds)
 
 # Show the average performance (across folds) for each value of `k`
 ggplot(data = fit_prediction$results) +
-  geom_line(mapping = aes(x = k, y = Accuracy))
+  geom_line(mapping = aes(x = k, y = Accuracy)) +
+  scale_x_continuous(breaks = round(seq(1, 20, by = 1),1))
 
 
 # Decision tree
