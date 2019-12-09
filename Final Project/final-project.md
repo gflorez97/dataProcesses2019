@@ -77,8 +77,22 @@ These histograms represent, at a glance, how our features are distributed. We ca
 
 We already supposed the players that played more minutes usually scored more. This plot confirms this, while also telling us that Field Goal Percentage tends to the mean when players play lots of minutes: for players with less than 20 minutes per game (role players or occasional players), the percentage has a higher standard deviation (**0.12**),  than for players with more than 20 minutes per game (**0.05**).
 
-...
+
+![Graph 3: Missing values in the original dataset](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png "Graph 3: Missing values in the original dataset")
+
+In this graph we obtain the percentage of values which are not available in the original dataset (the one dating back from 1950). As we can see, the position of the player or if he was an all nba is something that has been collected since them, but some game stats, like blocks or turnovers, where not computed until recent years, and thus should not be valid if we used the whole dataset. In the worst case, Turnovers, we are losing a 20% of the total number of players in the history of NBA, which doesn't sound too bad, all things considered. As we already stated, the first year we consider in our cleaned dataset is 1978.
+
+
+![Graph 4: Violin plot of the main features](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png "Graph 4: Violin plot of the main features")
+
+We decided to show a violin plot for 4 of the most important features (in our opinion, we'll ensure that in the next section): Points, Rebounds, Assists and Minutes. This type of plot is really useful to distinguish between our categorical variable, showing us the distribution of each variable depending on if the isAllNBA variable is TRUE or FALSE. For Points, we can observe most players lie between the 15 and 30 zone, with some outliers of players with more than 30 (all time great scorers like Michael Jordan or Kobe Bryant), and a few players with less than 15 (in most cases, great defensive players like Ben Wallace, with higher numbers for rebounds, blocks and steals). The Rebounds and Assists plots are more interesting, as it is not that clear that there is a real difference. In fact, there are more all nba players in the lower zone for assists than in the upper one, although non all nba players tend to have a small number of assists. Finally, it is clear that, while for non all nba players the minutes plot is more or less evenly distributed, most all nba play more than 30 minutes per game. From that we can suppose they play more because they are better, and playing more let them get better statistics. That is finally computed positively when being selected to the All NBA. Of course, as there are many more non All NBA than All NBA, this doesn't mean if a player plays more it is more likely he is an All NBA: from the 158 players with 40 or more minutes per game, only 49 (about one third of them) were selected to the All NBA first or second team.
+
+
+![Graph 5: Density plot of the minutes](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png "Graph 5: Density plot of the minutes")
+
+Finally, we present a density plot of the minutes per game, to further insist in the fact than all NBA players play more minutes than non all NBA players, on average. This doesn't mean, as we already stated, that there are more all nba players playing lots of minutes than non all nba, it's just that players with less than 30 minutes are very less likely to be selected to the all nba. 
   
+
 # Methods
 
 The appropriate methods are employed to answer the question of interest, including:
@@ -136,7 +150,10 @@ Moving forward, we present the algorithms we have used for this machine learning
 ...
 
 ### Decision tree
-In this case we didn't use the training-test partition, nor we tried to generate the best machine learning model. The idea was to apply a decision tree algorithm to be able to visually get a glance at how this algorithm discriminate between the best players and the rest. In the result section we present a visualization of that tree, and try to interpret it.
+The idea now was to apply a decision tree algorithm to be able to visually get a glance at how this algorithm discriminate between the best players and the rest. In the result section we present a visualization of that tree, and try to interpret it, along with the prediction results.
+
+### 
+...
 
 
 # Results
@@ -150,6 +167,14 @@ You must provide a clear interpretation of your statistical and machine learning
 
 ## Prediction
 
+### K-nearest neighbors
+
+...
+
+### Decision tree
+...
+
+### 
 ...
 
 # Discussion and Future Work
