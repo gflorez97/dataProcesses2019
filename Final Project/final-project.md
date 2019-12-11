@@ -119,7 +119,7 @@ The appropriate methods are employed to answer the question of interest, includi
 The idea now is to be able to predict if a player season is one of the 10 best in the league, using our features. This is a classification problem, in which there are two classes (TRUE and FALSE). We will directly use the cleaned dataset without modifications, as we already handled missing values in previous sections.
 
 First, we treat our isAllNBA variable as a factor (this is going to be the only categorical variable we are using), and create a data partition to split our data into testing and training data. We decided to use 80% for training and 20% for test, which is a reasonable partition for our dataset size.
-```{r}
+```r
 nbaFinal$isAllNBA <- factor(nbaFinal$isAllNBA)
 
 trainIndex <- createDataPartition(nbaFinal$isAllNBA,
@@ -132,7 +132,7 @@ test_set <- nbaFinal[ -trainIndex, ]
 ```
 
 Now that we have our training and test set, we prepare our train function (we will use the train function from the caret package). For this, we need to declare that we are using cross validation (with 10 folds) for training:
-```{r}
+```r
 fitControl <- trainControl(
   method = "cv",
   number = 10,
@@ -141,12 +141,12 @@ fitControl <- trainControl(
 ```
 
 A grid parameter is also used used for each technique, in order to optimize the parameters each machine learning technique uses. For example, for the K-nearest neighbors:
-```{r}
+```r
 grid <- expand.grid(k = 1:20)
 ```
 
 The model used in this section uses the following features:
-```{r}
+```r
 isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes
 ```
 
@@ -180,7 +180,7 @@ After presenting the trained models to the test set to predict, we obtained the 
 
 We compute the confusion matrix and generate some basic statistics to better analyze the results:
 
-```{r}
+```r
 Confusion Matrix and Statistics
 
           Reference
@@ -195,7 +195,7 @@ Prediction FALSE TRUE
                                           
                   Kappa : 0.6226          
                                           
- Mcnemar's Test P-Value : 0.02797         
+ Mcnemars Test P-Value : 0.02797         
                                           
             Sensitivity : 0.9909          
             Specificity : 0.7143          
@@ -223,7 +223,7 @@ In this case, along with the prediction, we wanted to obtain a visual of a tree 
 
 This gives us some key clues about our data. The first discriminant feature is Points: if a player scored more than 23, he is most likely to be an all nba (the more blue, the more likely to select TRUE, and viceversa for red), and if he scored more than 27, even more; finally, TRUE will be considered if there were more than 5 rebounds. Let's study another path: for players with less than 23 points, assist number is heavily weighted: if they have less than 10 (that is, not scorer players who aren't also great passers) they are most probably not an all nba. But, if they are good passers, the decision divides between more or less than 14 points: the tree tell us less than 14 points is a really low number, even for a non mainly scorer (like a playmaking point guard), and thus he is probably not an all nba.
 
-```{r}
+```r
 Confusion Matrix and Statistics
 
           Reference
@@ -238,7 +238,7 @@ Prediction FALSE TRUE
                                           
                   Kappa : 0.5973          
                                           
- Mcnemar's Test P-Value : 0.007001        
+ Mcnemars Test P-Value : 0.007001        
                                           
             Sensitivity : 0.9901          
             Specificity : 0.7119          
@@ -257,7 +257,7 @@ There are no major changes between this and the k-nearest neighbor, neither in t
 
 In this case, the model is not able to correctly adjust to what we want.
 
-```{r}
+```r
 Confusion Matrix and Statistics
 
           Reference
@@ -272,7 +272,7 @@ Prediction FALSE  TRUE
                                           
                   Kappa : 0               
                                           
- Mcnemar's Test P-Value : <2e-16          
+ Mcnemars Test P-Value : <2e-16          
                                           
             Sensitivity : 0.9795          
             Specificity :     NA          
