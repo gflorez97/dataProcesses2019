@@ -112,7 +112,11 @@ The appropriate methods are employed to answer the question of interest, includi
 
 ## Strength of relationships
 
-...
+- Intentado con el lm para predecir isAllNBA, de múltiples maneras y con múltiplos y cuadrados, no llegamos a un buen R squared, ningún model bien ajustado, sólo hasta +- 0.3
+- Intentado con glm (binomial, poisson), tampoco es posible
+- Quizá no es posible con casos simples (lineal, logístico) llegar a un buen modelo, así que no queda del todo claro.
+- Factores externos, subjetividad. 
+- Cambiamos por un modelo para predecir los minutos en base a las otras, pensamos que muchos minutos probablement ayuden a isllnba. 
 
 ## Prediction
 
@@ -170,7 +174,7 @@ You must provide a clear interpretation of your statistical and machine learning
 
 ## Strength of relationships
 
-...
+- Resultados de lo de antes. Para isAllNBA mal, para minutos mucho mejor.
 
 ## Prediction
 

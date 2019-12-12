@@ -149,7 +149,7 @@ nbaFinalLM$isAllNBACuant[nbaFinalLM$isAllNBA==F] <- 0
 
 model = glm(isAllNBA ~ Points + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM, family=gaussian)
 model = lm(isAllNBA ~ Points + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM)
-model = lm(Minutes ~ Points + Rebounds + Assists + isAllNBA, data=nbaFinal)
+model = lm(Minutes ~ Points + Rebounds + Assists + Turnovers*-1 + Fouls*-1 + FieldGoalPercentage*pointsCuant , data = nbaFinalLM)
 summary(model)
 plot(model)
 
