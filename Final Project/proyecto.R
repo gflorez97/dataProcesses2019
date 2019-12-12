@@ -130,54 +130,28 @@ ggdensity(uniPosition, x = "Minutes", fill = "isAllNBA", palette = "simpsons")
 
 
 # Linear model
-# Does faculty salary vary by gender and/or rank?
 
-# Set up
-
-t.test(females$sl, males$sl)
-
-simple_model <- lm(sl ~ yr, data = salary_data)
-summary(simple_model)
-
-# Interpret the following output of your model
-# - betas:
-# - p-values:
-# - R-squared:
-
-# Make a column `simple_preds` that hold the predictions from this model
-salary_data$simple_preds <- simple_model$fitted.values
-
-# Plot these predicted values against the actual values
-ggplot(data = salary_data) +
-  geom_point(mapping = aes(x = sl, y = model_preds))
-
-# Plot your residuals against salary (to see systematic error)
-model$error <- model$model_preds - model$sl
-ggplot(data = model) +
-  geom_point(mapping = aes(x = isAllNBA, y = error)) +
-  geom_hline(yintercept = 0)
-
-
-
-nbaFinalLM <- nbaFinal 
+nbaFinalLM = nbaFinal
 nbaFinalLM$pointsCuant <- NA
-nbaFinalLM$pointsCuant[nbaFinal$Points <= 10] <- "LOW"
-nbaFinalLM$pointsCuant[ 10 > nbaFinal$Points & nbaFinal$Points <= 20] <- "MEDIUM"
-nbaFinalLM$pointsCuant[nbaFinal$Points > 20] <- "HIGH"
-  
-model = lm(isAllNBA ~ pointsCuant*pointsCuant*Assists*Blocks*Steals*Turnovers, data=nbaFinalLM)
+nbaFinalLM$pointsCuant[nbaFinalLM$Points <= 10] <- "LOW"
+nbaFinalLM$pointsCuant[ 10 < nbaFinalLM$Points & nbaFinalLM$Points <= 20] <- "MEDIUM"
+nbaFinalLM$pointsCuant[nbaFinalLM$Points > 20] <- "HIGH"
+
+nbaFinalLM$minutesCuant <- NA
+nbaFinalLM$minutesCuant[nbaFinalLM$Minutes <= 15] <- "LOW"
+nbaFinalLM$minutesCuant[ 15 < nbaFinalLM$Minutes & nbaFinalLM$Minutes <= 30] <- "MEDIUM"
+nbaFinalLM$minutesCuant[nbaFinalLM$Minutes > 30] <- "HIGH"
+
+nbaFinalLM$isAllNBACuant <- NA
+nbaFinalLM$isAllNBACuant[nbaFinalLM$isAllNBA==T] <- 1
+nbaFinalLM$isAllNBACuant[nbaFinalLM$isAllNBA==F] <- 0
+
+
+model = glm(isAllNBA ~ Points + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM, family=gaussian)
+model = lm(isAllNBA ~ Points + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM)
+model = lm(Minutes ~ Points + Rebounds + Assists + isAllNBA, data=nbaFinal)
 summary(model)
-plot(model$residuals)
-
-
-pointsNBA <- nbaFinal %>% 
-  filter(isAllNBA=T) %>% 
-  
-
-t.test(nbaFinal$isAllNBA, nbaFinal$Points)
-
-outlierTest(model)
-plot(model, which=c(1:4), ask=F)
+plot(model)
 
 
 # Prediction
