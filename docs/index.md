@@ -82,6 +82,8 @@ We already supposed the players that played more minutes usually scored more. Th
 
 In this graph we obtain the percentage of values which are not available in the original dataset (the one dating back from 1950). As we can see, the position of the player or if he was an all nba is something that has been collected since them, but some game stats, like blocks or turnovers, where not computed until recent years, and thus should not be valid if we used the whole dataset. In the worst case, Turnovers, we are losing a 20% of the total number of players in the history of NBA, which doesn't sound too bad, all things considered. As we already stated, the first year we consider in our cleaned dataset is 1978.
 
+![Graph 3_2: Number of missing variables per year](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png "Graph 3_2: Number of missing variables per year")
+In this case, we can observe the years in which the last variables started to appear. Until the 70's, the last two features where still not present.
 
 ![Graph 4: Violin plot of the main features](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png "Graph 4: Violin plot of the main features")
 
@@ -110,14 +112,75 @@ The appropriate methods are employed to answer the question of interest, includi
 
 ## Strength of relationships
 
-...
+- Intentado con el lm para predecir isAllNBA, de múltiples maneras y con múltiplos y cuadrados, no llegamos a un buen R squared, ningún model bien ajustado, sólo hasta +- 0.3
+- Intentado con glm (binomial, poisson), tampoco es posible
+- Quizá no es posible con casos simples (lineal, logístico) llegar a un buen modelo, así que no queda del todo claro.
+- Factores externos, subjetividad. 
+- Cambiamos por un modelo para predecir los minutos en base a las otras, pensamos que muchos minutos probablement ayuden a isllnba. 
+
+We tried to create a linear model, using the r function ```rm``` to try to assess the strength of relationships in our dataset, related to whether a player is or not one of the 10 best of a year. Using the next formula, we wanted to obtain the model that maximized the R-squared value, as it is a metric of the strength of our model in describing the features, and then to study the significance of each of the features in that model, trying to see which ones are the most important for our variable of interest.
+
+``` r
+model = lm(isAllNBACuant ~ FEATURES, data=nbaFinalLM)
+```
+
+We tried several ways, but could not obtain a high R-squared value, even by including all features, squared versions of the features we consider most important, like Minutes and Points, or by transforming our features in categorical features with 3 different states:
+
+``` r
+nbaFinalLM$minutesCuant <- NA
+nbaFinalLM$minutesCuant[nbaFinalLM$Minutes <= 15] <- "LOW"
+nbaFinalLM$minutesCuant[ 15 < nbaFinalLM$Minutes & nbaFinalLM$Minutes <= 30] <- "MEDIUM"
+nbaFinalLM$minutesCuant[nbaFinalLM$Minutes > 30] <- "HIGH"
+```
+
+Here we present an example of a generated model summary:
+``` r
+Call:
+lm(formula = isAllNBACuant ~ pointsCuant + Rebounds + Assists + 
+    Steals + Blocks + Minutes, data = nbaFinalLM)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.51455 -0.01777 -0.00043  0.01236  1.00735 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(>|t|)    
+(Intercept)        0.3503253  0.0063034  55.578  < 2e-16 ***
+pointsCuantLOW    -0.3379426  0.0052482 -64.392  < 2e-16 ***
+pointsCuantMEDIUM -0.3325302  0.0047105 -70.594  < 2e-16 ***
+Rebounds           0.0127910  0.0005744  22.269  < 2e-16 ***
+Assists            0.0211510  0.0007332  28.847  < 2e-16 ***
+Steals             0.0097843  0.0023665   4.134 3.57e-05 ***
+Blocks             0.0278016  0.0023220  11.973  < 2e-16 ***
+Minutes           -0.0041232  0.0001909 -21.599  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1175 on 19546 degrees of freedom
+Multiple R-squared:  0.3117,	Adjusted R-squared:  0.3114 
+F-statistic:  1264 on 7 and 19546 DF,  p-value: < 2.2e-16
+```
+
+As can be seen, the Adjusted R-squared value is low (we estimate a decent value would be more or less 0.7). The R-squared indicates the percentage of the variance in the dependent variable that the independent variables explain, and thus it is clear this model is not explaining well the isAllNBA variable. Then, we can not make a correct analysis of the coefficients, and try to see which variables are more important. In this case our hypothesis is fulfilled, as we thought minutes and points were the most important variables, and in the model they have the biggest estimate (negative, because the isAllNBA=FALSE is the positive answer), but we can not conclude anything.
+
+![Residual analysis of the bad model](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotBadModel.png "Residual analysis of the bad model")
+
+If we analyze the residuals we come the same conclusion: this model does not fit well. We also tried using the ```glm``` function from R to create a more complex model (using binomial or poisson distributions), but neither of those solutions enhanced our results. 
+
+We concluded, then, that this problem is not a linear problem to solve, and that trying to use linear regresion to predict if a NBA player is one of the best of each year is not a good idea, as it is a problem that can't be fitted well using a linear approach. We believe, as the AllNBA selection is always subjective and does not need to rely directly on statistics, some players who had merits to be included, just by their numbers, were not included, and that some players with worse numbers got included (maybe because of intangibles, basketball IQ or defence capabilities, which are harder to measure).
+
+- Cambiamos por un modelo para predecir los minutos en base a las otras, pensamos que muchos minutos probablement ayuden a isllnba. 
+
+
+
+
 
 ## Prediction
 
 The idea now is to be able to predict if a player season is one of the 10 best in the league, using our features. This is a classification problem, in which there are two classes (TRUE and FALSE). We will directly use the cleaned dataset without modifications, as we already handled missing values in previous sections.
 
 First, we treat our isAllNBA variable as a factor (this is going to be the only categorical variable we are using), and create a data partition to split our data into testing and training data. We decided to use 80% for training and 20% for test, which is a reasonable partition for our dataset size.
-```{r}
+```r
 nbaFinal$isAllNBA <- factor(nbaFinal$isAllNBA)
 
 trainIndex <- createDataPartition(nbaFinal$isAllNBA,
@@ -130,7 +193,7 @@ test_set <- nbaFinal[ -trainIndex, ]
 ```
 
 Now that we have our training and test set, we prepare our train function (we will use the train function from the caret package). For this, we need to declare that we are using cross validation (with 10 folds) for training:
-```{r}
+```r
 fitControl <- trainControl(
   method = "cv",
   number = 10,
@@ -139,21 +202,26 @@ fitControl <- trainControl(
 ```
 
 A grid parameter is also used used for each technique, in order to optimize the parameters each machine learning technique uses. For example, for the K-nearest neighbors:
-```{r}
+```r
 grid <- expand.grid(k = 1:20)
+```
+
+The model used in this section uses the following features:
+```r
+isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes
 ```
 
 Moving forward, we present the algorithms we have used for this machine learning section:
 
 ### K-nearest neighbors
 
-...
+The K-nearest neighbors algorithm is one of the most used machine learning techniques for classification. The parameter to be optimized is k, the number of neighbors (nearest from the data to predict) selected in order to try to estimate the class of the data.
 
 ### Decision tree
 The idea now was to apply a decision tree algorithm to be able to visually get a glance at how this algorithm discriminate between the best players and the rest. In the result section we present a visualization of that tree, and try to interpret it, along with the prediction results.
 
-### 
-...
+### Random forest
+Lastly, we tried to expand the decision tree algorithm and use a random forest. However, due to the high number of elements in our dataset, we couldn't train a big model unless we limited ourselves to a smaller dataset, from which, as will be presented in the following section, the results were worse than expected.
 
 
 # Results
@@ -163,19 +231,121 @@ You must provide a clear interpretation of your statistical and machine learning
 
 ## Strength of relationships
 
-...
+- Resultados de lo de antes. Para isAllNBA mal, para minutos mucho mejor.
 
 ## Prediction
 
+After presenting the trained models to the test set to predict, we obtained the following results:
+
 ### K-nearest neighbors
 
-...
+We compute the confusion matrix and generate some basic statistics to better analyze the results:
+
+```r
+Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE TRUE
+     FALSE  3812   18
+     TRUE     35   45
+                                          
+               Accuracy : 0.9864          
+                 95% CI : (0.9823, 0.9898)
+    No Information Rate : 0.9839          
+    P-Value [Acc > NIR] : 0.11172         
+                                          
+                  Kappa : 0.6226          
+                                          
+ Mcnemars Test P-Value : 0.02797         
+                                          
+            Sensitivity : 0.9909          
+            Specificity : 0.7143          
+         Pos Pred Value : 0.9953          
+         Neg Pred Value : 0.5625          
+             Prevalence : 0.9839          
+         Detection Rate : 0.9749          
+   Detection Prevalence : 0.9795          
+      Balanced Accuracy : 0.8526  
+```
+
+In our case, as this is a classification problem, we are mostly looking at the accuracy (or the confidence intervals for it), the sensitivity and the specificity. The accuracy is really good: 3857 of 3910 players were correctly predicted, and most of the errors were all nba players predicted as not all nba players (logical, as there are way more FALSE than TRUE, the model tends to select more FALSE). Sensitivity, in this case, refers to the number of predicted FALSE players divided by the total real number of FALSE players: it states how well our model predict a player is not an all nba, taking into account all the players that really are all nba. On the other hand, the specificity refers to the number of predicted TRUE players, divided by the correct total of TRUE players. This number is smaller, which means some TRUE players were predicted as FALSE. This is also logical, as there are less training cases of TRUE players, the model fails sometimes to detect a player as TRUE.
+
+Let's see the evolution of the k parameter, which was tuned used a grid search:
+
+![k parameter evolution](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png "k parameter evolution")
+
+The best accuracy is obtained at k=9, but the difference is really small between this and other values. It seems clear 1 and 2 are not the best values in this case, but any of the others result in similar results.
+
 
 ### Decision tree
-...
+In this case, along with the prediction, we wanted to obtain a visual of a tree to illustrate the strength of this model, and how it discretizes between the two possible classes. We got the following tree:
 
-### 
-...
+![Decision Tree](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictionTree.png "Decision Tree")
+
+This gives us some key clues about our data. The first discriminant feature is Points: if a player scored more than 23, he is most likely to be an all nba (the more blue, the more likely to select TRUE, and viceversa for red), and if he scored more than 27, even more; finally, TRUE will be considered if there were more than 5 rebounds. Let's study another path: for players with less than 23 points, assist number is heavily weighted: if they have less than 10 (that is, not scorer players who aren't also great passers) they are most probably not an all nba. But, if they are good passers, the decision divides between more or less than 14 points: the tree tell us less than 14 points is a really low number, even for a non mainly scorer (like a playmaking point guard), and thus he is probably not an all nba.
+
+```r
+Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE TRUE
+     FALSE  3813   17
+     TRUE     38   42
+                                          
+               Accuracy : 0.9859          
+                 95% CI : (0.9817, 0.9894)
+    No Information Rate : 0.9849          
+    P-Value [Acc > NIR] : 0.329154        
+                                          
+                  Kappa : 0.5973          
+                                          
+ Mcnemars Test P-Value : 0.007001        
+                                          
+            Sensitivity : 0.9901          
+            Specificity : 0.7119          
+         Pos Pred Value : 0.9956          
+         Neg Pred Value : 0.5250          
+             Prevalence : 0.9849          
+         Detection Rate : 0.9752          
+   Detection Prevalence : 0.9795          
+      Balanced Accuracy : 0.8510 
+```
+
+There are no major changes between this and the k-nearest neighbor, neither in the accuracy nor in the sensitivity or specificity.
+
+
+### Random forest
+
+In this case, the model is not able to correctly adjust to what we want.
+
+```r
+Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE  TRUE
+     FALSE 18962     0
+     TRUE    396     0
+                                          
+               Accuracy : 0.9795          
+                 95% CI : (0.9774, 0.9815)
+    No Information Rate : 1               
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0               
+                                          
+ Mcnemars Test P-Value : <2e-16          
+                                          
+            Sensitivity : 0.9795          
+            Specificity :     NA          
+         Pos Pred Value :     NA          
+         Neg Pred Value :     NA          
+             Prevalence : 1.0000          
+         Detection Rate : 0.9795          
+   Detection Prevalence : 0.9795          
+      Balanced Accuracy :     NA          
+```
+
+Why, if the accuracy is still high? Because now every value is assigned to FALSE. By that, most of the data is correctly classified, as there are way more FALSE than TRUE, but this only assumes that any player is not an all nba, which is a dull prediction. We guess this happens because of the reduced training set, or because this algorithm can't fit well our model with the parameters selected (we used the 'cforest' method from the caret package).
 
 # Discussion and Future Work
 Based on _specific observations_ from the results section, the report clearly provides:

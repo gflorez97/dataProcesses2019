@@ -18,6 +18,8 @@ library(gridExtra)
 library(formattable)
 library(corrplot)
 
+# Generation of our dataset
+
 # Taking all NBA player stats, and getting the name without * (to be able to join by name)
 nba.players <- as.data.frame(read.csv("./data/Seasons_Stats.csv", stringsAsFactors = FALSE, header = TRUE))
 nba.players$Player <- gsub("\\*", "", nba.players$Player)
@@ -147,8 +149,8 @@ nbaFinalLM$isAllNBACuant[nbaFinalLM$isAllNBA==T] <- 1
 nbaFinalLM$isAllNBACuant[nbaFinalLM$isAllNBA==F] <- 0
 
 
-model = glm(isAllNBA ~ Points + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM, family=gaussian)
-model = lm(isAllNBA ~ Points + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM)
+model = glm(isAllNBACuant ~ Points + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM, family=gaussian)
+model = lm(isAllNBACuant ~ pointsCuant + Rebounds + Assists + Steals + Blocks + Minutes, data=nbaFinalLM)
 model = lm(Minutes ~ Points + Rebounds + Assists + Turnovers*-1 + Fouls*-1 + FieldGoalPercentage*pointsCuant , data = nbaFinalLM)
 summary(model)
 plot(model)

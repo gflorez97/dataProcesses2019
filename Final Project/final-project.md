@@ -118,6 +118,63 @@ The appropriate methods are employed to answer the question of interest, includi
 - Factores externos, subjetividad. 
 - Cambiamos por un modelo para predecir los minutos en base a las otras, pensamos que muchos minutos probablement ayuden a isllnba. 
 
+We tried to create a linear model, using the r function ```rm``` to try to assess the strength of relationships in our dataset, related to whether a player is or not one of the 10 best of a year. Using the next formula, we wanted to obtain the model that maximized the R-squared value, as it is a metric of the strength of our model in describing the features, and then to study the significance of each of the features in that model, trying to see which ones are the most important for our variable of interest.
+
+``` r
+model = lm(isAllNBACuant ~ FEATURES, data=nbaFinalLM)
+```
+
+We tried several ways, but could not obtain a high R-squared value, even by including all features, squared versions of the features we consider most important, like Minutes and Points, or by transforming our features in categorical features with 3 different states:
+
+``` r
+nbaFinalLM$minutesCuant <- NA
+nbaFinalLM$minutesCuant[nbaFinalLM$Minutes <= 15] <- "LOW"
+nbaFinalLM$minutesCuant[ 15 < nbaFinalLM$Minutes & nbaFinalLM$Minutes <= 30] <- "MEDIUM"
+nbaFinalLM$minutesCuant[nbaFinalLM$Minutes > 30] <- "HIGH"
+```
+
+Here we present an example of a generated model summary:
+``` r
+Call:
+lm(formula = isAllNBACuant ~ pointsCuant + Rebounds + Assists + 
+    Steals + Blocks + Minutes, data = nbaFinalLM)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.51455 -0.01777 -0.00043  0.01236  1.00735 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(>|t|)    
+(Intercept)        0.3503253  0.0063034  55.578  < 2e-16 ***
+pointsCuantLOW    -0.3379426  0.0052482 -64.392  < 2e-16 ***
+pointsCuantMEDIUM -0.3325302  0.0047105 -70.594  < 2e-16 ***
+Rebounds           0.0127910  0.0005744  22.269  < 2e-16 ***
+Assists            0.0211510  0.0007332  28.847  < 2e-16 ***
+Steals             0.0097843  0.0023665   4.134 3.57e-05 ***
+Blocks             0.0278016  0.0023220  11.973  < 2e-16 ***
+Minutes           -0.0041232  0.0001909 -21.599  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1175 on 19546 degrees of freedom
+Multiple R-squared:  0.3117,	Adjusted R-squared:  0.3114 
+F-statistic:  1264 on 7 and 19546 DF,  p-value: < 2.2e-16
+```
+
+As can be seen, the Adjusted R-squared value is low (we estimate a decent value would be more or less 0.7). The R-squared indicates the percentage of the variance in the dependent variable that the independent variables explain, and thus it is clear this model is not explaining well the isAllNBA variable. Then, we can not make a correct analysis of the coefficients, and try to see which variables are more important. In this case our hypothesis is fulfilled, as we thought minutes and points were the most important variables, and in the model they have the biggest estimate (negative, because the isAllNBA=FALSE is the positive answer), but we can not conclude anything.
+
+![Residual analysis of the bad model](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotBadModel.png "Residual analysis of the bad model")
+
+If we analyze the residuals we come the same conclusion: this model does not fit well. We also tried using the ```glm``` function from R to create a more complex model (using binomial or poisson distributions), but neither of those solutions enhanced our results. 
+
+We concluded, then, that this problem is not a linear problem to solve, and that trying to use linear regresion to predict if a NBA player is one of the best of each year is not a good idea, as it is a problem that can't be fitted well using a linear approach. We believe, as the AllNBA selection is always subjective and does not need to rely directly on statistics, some players who had merits to be included, just by their numbers, were not included, and that some players with worse numbers got included (maybe because of intangibles, basketball IQ or defence capabilities, which are harder to measure).
+
+- Cambiamos por un modelo para predecir los minutos en base a las otras, pensamos que muchos minutos probablement ayuden a isllnba. 
+
+
+
+
+
 ## Prediction
 
 The idea now is to be able to predict if a player season is one of the 10 best in the league, using our features. This is a classification problem, in which there are two classes (TRUE and FALSE). We will directly use the cleaned dataset without modifications, as we already handled missing values in previous sections.
