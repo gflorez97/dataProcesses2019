@@ -8,13 +8,10 @@
 - Rafael Inés Guillén
 
 # Abstract
-- Succinctly summarizes the importance and findings of the project within the 150 word limit.
 
-...
+This project tries to solve one of the most important questions in the world of NBA statistics: who are the best players in any given time? In order to answer this, we had to conduct a data driven examination, using a custom dataset based on the most important NBA statistics (points, rebounds, assists...). We started presenting some graphs in order to visualize our data. We tried to assess the strength of relationships between the features in our dataset, using a statistical approach. On the other hand, we used a machine learning approach to try to predict whether a certain player will become or not one of the best players in the league.
 
-# Introduction and Related Work
-- Provides a clear motivation for answering a _specific_ data driven question of interest (**5 points**)
-  
+# Introduction and Related Work  
 ## Introduction
 Nowadays, stats are everywhere. They cover most aspects of life, enabling us to analyze any situation with just some numbers. They are also, of course, in sports. Specially in american sports, as it has been the norm for many years to gather any statistic that might be useful, hoping to obtain knowledge from it and being able to say how is each sport evolving and which young players should be scouted in order to try to predict who is going to be the new Jordan, the new Brady or the new Trout.
 
@@ -25,7 +22,6 @@ We are, particularly, going to try to answer the following question: _**what mak
 For this, we have decided to focus in the All NBA selection. This annual selection consists in a voting, conducted by sportswriters and broadcasters throughout the United States and Canada, in which the best players of the season are selected. We are using the first and second all nba team, that is, the 10 best players in each year (regardless of the fact some positions might have better players than others, we are mostly getting 3-4 guards, 4-5 forwards and 1-3 centers per year).
 
 
-- Cites 5 _relevant_ pieces of relevant work (whatever format you choose is fine, including just a hyperlink) (**1 point each**)
 ## Previous works: 
 - [Bhandari, Colet, Parker, Pines, Pratap, Ramanujam (1997). Advanced Scout: Data Mining and Knowledge Discovery in NBA Data. Data Mining and Knowledge Discovery, 1, pp.121–125.](https://www.cse.unr.edu/~sushil/class/ml/papers/local/nba.pdf)
 - [Goldsberry (2012). CourtVision: New Visual and Spatial Analytics for the NBA. MIT Sloan Sports Analytics Conference](http://www.sloansportsconference.com/wp-content/uploads/2012/02/Goldsberry_Sloan_Submission.pdf)
@@ -35,7 +31,6 @@ For this, we have decided to focus in the All NBA selection. This annual selecti
 
 
 # Exploratory Data Analysis
-- Introduces the dataset by describing the origin (source) and structure (shape, relevant features) of the data being used (**5 points**)
 
 For answering the question of interest, we needed two things: every NBA season for each player (Jordan at age 21, Jordan at age 22, Jordan at age 23...) with his main statistics, and whether that season resulted in a first or second all nba selection for that player. When starting this project, we proposed using a [Kaggle dataset](https://www.kaggle.com/drgilermo/nba-players-stats) that contained the stats we needed for every player, but it didn't contain any feature to know if that player had an all nba selection. Then, we used the R package [nbaStatR](https://github.com/abresler/nbastatR) to gather, from the [NBA API](https://stats.nba.com), a dataset with every player who was selected in any all nba team.
 
@@ -56,17 +51,8 @@ Our final dataset, that can be viewed [here](https://github.com/gflorez97/dataPr
 - **FieldGoalPercentage**: ratio of made shots by total shots (adjusted to [0,1])
 - **Minutes**: minutes played per game of that player (adjusted to integer numbers)
 - **Fouls**: fouls committed per game of that player (adjusted to integer numbers)
-   
-
-
-- Creates 5 well designed and formatted graphics (**15 points**, 3 each)
-  - The visual uses the appropriate visual encodings based on the data type (**1 point**)
-  - Written interpretation of graphic is provided (**1 point**)
-  - Clear axis labels, titles, and legends are included, where appropriate (**1 point**)
-
 
 We present below 5 graphics to illustrate our dataset:
-
 
 ![Graph 1: Histograms of features](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png "Graph 1: Histograms of features")
 
@@ -89,26 +75,12 @@ In this case, we can observe the years in which the last variables started to ap
 
 We decided to show a violin plot for 4 of the most important features (in our opinion, we'll ensure that in the next section): Points, Rebounds, Assists and Minutes. This type of plot is really useful to distinguish between our categorical variable, showing us the distribution of each variable depending on if the isAllNBA variable is TRUE or FALSE. For Points, we can observe most players lie between the 15 and 30 zone, with some outliers of players with more than 30 (all time great scorers like Michael Jordan or Kobe Bryant), and a few players with less than 15 (in most cases, great defensive players like Ben Wallace, with higher numbers for rebounds, blocks and steals). The Rebounds and Assists plots are more interesting, as it is not that clear that there is a real difference. In fact, there are more all nba players in the lower zone for assists than in the upper one, although non all nba players tend to have a small number of assists. Finally, it is clear that, while for non all nba players the minutes plot is more or less evenly distributed, most all nba play more than 30 minutes per game. From that we can suppose they play more because they are better, and playing more let them get better statistics. That is finally computed positively when being selected to the All NBA. Of course, as there are many more non All NBA than All NBA, this doesn't mean if a player plays more it is more likely he is an All NBA: from the 158 players with 40 or more minutes per game, only 49 (about one third of them) were selected to the All NBA first or second team.
 
-
 ![Graph 5: Density plot of the minutes](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png "Graph 5: Density plot of the minutes")
 
 Finally, we present a density plot of the minutes per game, to further insist in the fact than all NBA players play more minutes than non all NBA players, on average. This doesn't mean, as we already stated, that there are more all nba players playing lots of minutes than non all nba, it's just that players with less than 30 minutes are very less likely to be selected to the all nba. 
   
 
 # Methods
-
-The appropriate methods are employed to answer the question of interest, including:
-- **Strength of relationships**: Uses the appropriate technique to assess the strength of relationships amongst your variables of interest. You should include: 
-  - A formula describing how you believe your features (independent variables) are related to your outcome of interest (dependent variable) (**5 points**)
-  - A defense of the variables included in your formula (**5 points**)
-  - Creating the appropriate model based on your dataset (**5 points**)
-- **Prediction**: You must also make predictions for your outcome of interest. In doing so, you must demonstrate a clear use of:
-  - Splitting your data into testing/training data (**2 points**)
-  - Applying cross validation to your model (**3 points**)
-  - Appropriately handling any missing values (**2 points**)
-  - Appropriately using categorical variables (**3 points**)
-  - Using a grid search to find the best parameters for you model of interest (**2 points**)
-  - Employing the algorithm of interest (**3 points**)
 
 ## Strength of relationships
 
@@ -118,7 +90,7 @@ The appropriate methods are employed to answer the question of interest, includi
 - Factores externos, subjetividad. 
 - Cambiamos por un modelo para predecir los minutos en base a las otras, pensamos que muchos minutos probablement ayuden a isllnba. 
 
-We tried to create a linear model, using the r function ```rm``` to try to assess the strength of relationships in our dataset, related to whether a player is or not one of the 10 best of a year. Using the next formula, we wanted to obtain the model that maximized the R-squared value, as it is a metric of the strength of our model in describing the features, and then to study the significance of each of the features in that model, trying to see which ones are the most important for our variable of interest.
+We tried to create a linear model, using the r function ```lm``` to try to assess the strength of relationships in our dataset, related to whether a player is or not one of the 10 best of a year. Using the next formula, we wanted to obtain the model that maximized the R-squared value, as it is a metric of the strength of our model in describing the features, and then to study the significance of each of the features in that model, trying to see which ones are the most important for our variable of interest.
 
 ``` r
 model = lm(isAllNBACuant ~ FEATURES, data=nbaFinalLM)
@@ -189,13 +161,7 @@ Lastly, we tried to expand the decision tree algorithm and use a random forest. 
 
 
 # Results
-You must provide a clear interpretation of your statistical and machine learning results, including at least **one visual or table** for each.
-- **Strengths of relationships**: For the features you included in your model, you must describe the strength (significance) and magnitude of the relationships. This can be presented in a table or chart, and pertinent observations should be described in the text. (**10 points**)
-- **Predictions**: How well were you able to predict values in the dataset? You should both report appropriate metrics based on the type of outcome you're predicting (e.g., root mean squared error v.s. accuracy), as well as a high quality visual showing the strength of your model (**10 points**)
-
 ## Strength of relationships
-
-- Resultados de lo de antes. Para isAllNBA mal, para minutos mucho mejor.
 
 Here we present an example of a generated model summary, when using isAllNBA as the outcome of interest:
 
@@ -226,7 +192,7 @@ Multiple R-squared:  0.3117,	Adjusted R-squared:  0.3114
 F-statistic:  1264 on 7 and 19546 DF,  p-value: < 2.2e-16
 ```
 
-As can be seen, the Adjusted R-squared value is low (we estimate a decent value would be more or less 0.7). The R-squared indicates the percentage of the variance in the dependent variable that the independent variables explain, and thus it is clear this model is not explaining well the isAllNBA variable. Then, we can not make a correct analysis of the coefficients, and try to see which variables are more important.
+As can be seen, the Adjusted R-squared value is low (we estimate a decent value would be around 0.7). The R-squared indicates the percentage of the variance in the dependent variable that the independent variables explain, and thus it is clear this model is not explaining well the isAllNBA variable. Then, we can not make a correct analysis of the coefficients, and try to see which variables are more important.
 
 ![Residual analysis of the bad model](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotBadModel.png "Residual analysis of the bad model")
 
@@ -396,54 +362,6 @@ Prediction FALSE  TRUE
 Why, if the accuracy is still high? Because now every value is assigned to FALSE. By that, most of the data is correctly classified, as there are way more FALSE than TRUE, but this only assumes that any player is not an all nba, which is a dull prediction. We guess this happens because of the reduced training set, or because this algorithm can't fit well our model with the parameters selected (we used the 'cforest' method from the caret package).
 
 # Discussion and Future Work
-Based on _specific observations_ from the results section, the report clearly provides:
-  - An analysis of the real world implications of the results, at least one full paragraph (**5 points**)
-  - Clear suggestion for directions of future research, at least one full paragraph (**5 points**)
+Based on the results presented in the strength of relationships and prediction sections, we can estimate this analysis would be useful in drafting and trading NBA players between teams. NBA teams could even use our models in the case of injured players that need a replacement. Taking into consideration the accuracy obtained in our models, specially in the prediction section, we can definitely conclude whether a certain player would be one of the best 10 players in the league. Despite all those implications, we were unable to find a good model for the strength of relationships section.
 
-...
-
-
-
-
-# PROJECT PROPOSAL (para reusar)
-
-# Domain of interest
-The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States (the NBA).
-We have choosen this topic for different reasons, one of this it´s because nowadays we see it as an interesting domain, besides as more and more data is available daily as games are played, and being able to analyze all that data properly is starting to become a priority for professional teams.
-Also, it's a sport that we usually watch and like being updated about the different nba news, furthermore thus we can compare the results of our analysis to our previous knowledge and this will help us to understand better the keys to know more about what is hidden behind this sport. (It will be something similar to the film "moneyball")
-
-## Previous works
-- [Paper from cse](https://www.cse.unr.edu/~sushil/class/ml/papers/local/nba.pdf): a relatively old (1996) paper describing how Data Mining and Knowledge Discovery can be applied to NBA data.
-- [Paper from sloan sport conference](http://www.sloansportsconference.com/wp-content/uploads/2012/02/Goldsberry_Sloan_Submission.pdf): this paper includes a case study in which the author studies is who the best shooter in the NBA using game data from 2006 to 2011.
-- [Paper from degruyter](https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf): this paper describes a method for ranking NBA teams based on a number of factors.
-
-## Data-driven questions
-<ol>
-	<li>Who is the most consistent three-point shooter in NBA history?</li>
-	<li>Which are the most offensive and defensive teams on a yearly basis?
-	Which of those teams repeated these strategics the most?
-	Which of those teams were on a streak?</li>
-	<li>How did the points-per-game statistic evolved throughout the years and how is it related to the rest of the stats (steals, rebounds, blocks, turnovers)?</li>
-</ol>
-
-# Finding Data
-## NBA Stats API
-- URL: [Stats NBA](https://stats.nba.com)
-- Description: this API includes data from mostly every game played in NBA history.
-We will be using the `nbastatR` package to access this API and get all the needed information for teams and players.
-- Data size: immeasurable (multiple endpoints, with multiple types of queries).
-- Questions to answer: 1, 2, 3
-
-## Basketball reference
-- URL: [Basketball reference](https://www.basketball-reference.com)
-- Description: this website also includes data from mostly every game played in NBA history.
-We will be using the `nbastatR` package to wrap the data from this website and get all the needed information for teams and players, specially the information not available from the NBA Stats API directly (missing values, advanced statistics only available in this web...).
-- Data size: immeasurable (multiple endpoints, with multiple types of queries).
-- Questions to answer: 1, 2, 3
-
-## NBA Players stats since 1950 (Kaggle dataset)
-- URL: [Kaggle](https://www.kaggle.com/drgilermo/nba-players-stats)
-- Description: finally, a _proper_ dataset from the Kaggle website, which also includes NBA players stats.
-This dataset would be used in case we have any problem with the other two sources (like problems fetching data or with missing values), as data should be the same.
-- Data size: the main CSV (`Seasons_stats`) has 24,691 observations and 53 features.
-- Questions to answer: 1, 2, 3
+We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (for example, number of followers in social media), participations in all star events (dunk contest, three-point contest, skill challenge)... We can also extrapolate our models to other sports, changing the features with the main statistics of those sports, to analyze the better players. 
