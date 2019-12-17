@@ -128,27 +128,8 @@ Finally, we present a density plot of the minutes per game, to further insist in
   
 ## Methods
 
-The appropriate methods are employed to answer the question of interest, including:
-- **Strength of relationships**: Uses the appropriate technique to assess the strength of relationships amongst your variables of interest. You should include: 
-  - A formula describing how you believe your features (independent variables) are related to your outcome of interest (dependent variable) (**5 points**)
-  - A defense of the variables included in your formula (**5 points**)
-  - Creating the appropriate model based on your dataset (**5 points**)
-- **Prediction**: You must also make predictions for your outcome of interest. In doing so, you must demonstrate a clear use of:
-  - Splitting your data into testing/training data (**2 points**)
-  - Applying cross validation to your model (**3 points**)
-  - Appropriately handling any missing values (**2 points**)
-  - Appropriately using categorical variables (**3 points**)
-  - Using a grid search to find the best parameters for you model of interest (**2 points**)
-  - Employing the algorithm of interest (**3 points**)
-
 ### Strength of relationships
-
-- Intentado con el lm para predecir isAllNBA, de múltiples maneras y con múltiplos y cuadrados, no llegamos a un buen R squared, ningún model bien ajustado, sólo hasta +- 0.3
-- Intentado con glm (binomial, poisson), tampoco es posible
-- Quizá no es posible con casos simples (lineal, logístico) llegar a un buen modelo, así que no queda del todo claro.
-- Factores externos, subjetividad. 
-- Cambiamos por un modelo para predecir los minutos en base a las otras, pensamos que muchos minutos probablement ayuden a isllnba. 
-
+ 
 We tried to create a linear model, using the r function ```rm``` to try to assess the strength of relationships in our dataset, related to whether a player is or not one of the 10 best of a year. Using the next formula, we wanted to obtain the model that maximized the R-squared value, as it is a metric of the strength of our model in describing the features, and then to study the significance of each of the features in that model, trying to see which ones are the most important for our variable of interest.
 
 ``` r
@@ -223,13 +204,7 @@ Lastly, we tried to expand the decision tree algorithm and use a random forest. 
 
 ## Results
 
-You must provide a clear interpretation of your statistical and machine learning results, including at least **one visual or table** for each.
-- **Strengths of relationships**: For the features you included in your model, you must describe the strength (significance) and magnitude of the relationships. This can be presented in a table or chart, and pertinent observations should be described in the text. (**10 points**)
-- **Predictions**: How well were you able to predict values in the dataset? You should both report appropriate metrics based on the type of outcome you're predicting (e.g., root mean squared error v.s. accuracy), as well as a high quality visual showing the strength of your model (**10 points**)
-
 ### Strength of relationships
-
-- Resultados de lo de antes. Para isAllNBA mal, para minutos mucho mejor.
 
 Here we present an example of a generated model summary, when using isAllNBA as the outcome of interest:
 
@@ -430,8 +405,6 @@ Why, if the accuracy is still high? Because now every value is assigned to FALSE
 
 ## Discussion and Future Work
 
-Based on _specific observations_ from the results section, the report clearly provides:
-  - An analysis of the real world implications of the results, at least one full paragraph (**5 points**)
-  - Clear suggestion for directions of future research, at least one full paragraph (**5 points**)
+Based on the results presented in the strength of relationships and prediction sections, we can estimate this analysis would be useful in drafting and trading NBA players between teams. NBA teams could even use our models in the case of injured players that need a replacement. Taking into consideration the accuracy obtained in our models, specially in the prediction section, we can definitely conclude whether a certain player would be one of the best 10 players in the league. Despite all those implications, we were unable to find a good model for the strength of relationships section.
 
-...
+We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (for example, number of followers in social media), participations in all star events (dunk contest, three-point contest, skill challenge)... We can also extrapolate our models to other sports, changing the features with the main statistics of those sports, to analyze the better players. 
