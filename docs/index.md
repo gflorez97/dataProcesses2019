@@ -28,15 +28,25 @@ Finally, we used a machine learning approach to try predicting whether a certain
   
 ### Introduction
 
-Nowadays, stats are everywhere. They cover most aspects of life, enabling us to analyze any situation with just some numbers. They are also, of course, in sports. Specially in american sports, as it has been the norm for many years to gather any statistic that might be useful, hoping to obtain knowledge from it and being able to say how is each sport evolving and which young players should be scouted in order to try to predict who is going to be the new Jordan, the new Brady or the new Trout.
+Nowadays, stats are everywhere.
+They cover most aspects of our life, ranging from rigorous industrial processes to mundane and trivial activities of our routine, enabling us to analyze any situation using numbers.
+One of the topics in which they are widely used and considered very valuable is, of course, sports.
+Specially in american sports, as it has been the norm for many years to gather any statistic that might be useful, hoping to extract knowledge from it.
+The goal is being able to tell how are sports evolving and which young players should be scouted, to try predicting who is going to be the new Jordan, the new Brady or the new Trout.
 
-The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States (the NBA). We have chosen this topic for different reasons: one of them is because nowadays we see it as an interesting domain,besides as more and more data is available daily as games are played, and being able to analyze all that data properly is starting to become a priority for professional teams. Also, it's a sport that we usually watch and like being updated about the different nba news, furthermore thus we can compare the results of our analysis to our previous knowledge and this will help us to understand better the keys to know more about what is hidden behind this sport. (It will be something similar to the film "Moneyball").
+The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States of America, commonly known with the acronym NBA.
+We have chosen this topic for numerous reasons: we believe it is an interesting domain&mdash;not only for us but for the general public&mdash;, the amount of data is constantly increasing as everyday new games are played and more data is collected, and having the power of analyzing all the data properly is becoming an increasingly higher priority for the professional teams.
+On top of that, it iss a sport we enjoy watching and we tend to be up-to-date with the different sources of NBA news, therefore we can compare the results of our analysis with our previous knowledge, helping us to better understand the unwritten rules behind this sport; similarly, this topic is explored in the film [Moneyball][moneyball].
 
-We are, particularly, going to try to answer the following question: _**what makes a player be one of the 10 best players in the NBA in a particular year?**_
+We will try answering the following question: _**what makes a player be one of the 10 best players in the NBA in a particular year?**_
 
-For this, we have decided to focus in the All NBA selection. This annual selection consists in a voting, conducted by sportswriters and broadcasters throughout the United States and Canada, in which the best players of the season are selected. We are using the first and second all nba team, that is, the 10 best players in each year (regardless of the fact some positions might have better players than others, we are mostly getting 3-4 guards, 4-5 forwards and 1-3 centers per year).
+To tackle this problem, we decided to focus in the [All NBA][all-nba] selection.
+This annual selection consists in a voting&mdash;conducted by sportswriters and broadcasters throughout the United States of America and Canada&mdash;, in which the best players of the season are selected.
+We used the first and second All-NBA team, that is, the 10 best players in each year.
+Regardless of the fact that some positions might have better players than others, we are mostly getting 3 to 4 guards, 4 to 5 forwards and 1 to 3 centers per year.
 
-- Cites 5 _relevant_ pieces of relevant work (whatever format you choose is fine, including just a hyperlink) (**1 point each**)
+[moneyball]: https://en.wikipedia.org/wiki/Moneyball_(film) "Wikipedia — Moneyball (film)"
+[all-nba]:   https://en.wikipedia.org/wiki/All-NBA_Team     "Wikipedia — All-NBA Team"
 
 ### Previous works: 
 
