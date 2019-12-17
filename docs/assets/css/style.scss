@@ -6,4 +6,12 @@
 .inner {
 	max-width: 75%;
 	text-align: justify;
+	
+	h1, figure {
+		text-align: center;
+	}
+	
+	figurecaption {
+		color: #555;
+	}	
 }
