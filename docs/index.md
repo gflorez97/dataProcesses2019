@@ -1,4 +1,4 @@
-<h1 style="text-align: center">Final Project Data Processes 2019</h1>
+<h1 align="center">Final Project Data Processes 2019</h1>
 
 ## Students
 
@@ -95,9 +95,9 @@ A brief description of the variables is found below:
 
 We present below 5 graphics to illustrate our dataset:
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png" alt="Figure 1: Histograms of features">
-	<figcaption style="color: #555555">Figure 1: Histograms of features</figcaption>
+	<figcaption>Figure 1: Histograms of features</figcaption>
 </figure>
 
 These histograms represent, at first sight, how the features are distributed.
@@ -105,17 +105,17 @@ It is noticeable that `Points`, `Rebounds`, `Assists`, `Blocks`, `Steals` and `T
 The `FieldGoalPercentage` seems to follow a normal distribution with a mean of **0.44** and some obvious outliers in `0` and `1`&mdash;in most cases, associated with players that played just a few minutes in a season, and probably shot a few times and either scored or failed those shots).
 The `Fouls` feature is quite left-skweded, because most players commit between 1 and 2 fouls per game, whereas the `Minutes` feature is distributed more evenly, because the overall amount of key players, role players and occasional players in the league is approximately the same.
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png" alt="Figure 2: 'Points' by 'FieldGoalPercentage', colored by 'Minutes'">
-	<figcaption style="color: #555555">Figure 2: <code>Points</code> by <code>FieldGoalPercentage</code>, colored by <code>Minutes</code></figcaption>
+	<figcaption>Figure 2: <code>Points</code> by <code>FieldGoalPercentage</code>, colored by <code>Minutes</code></figcaption>
 </figure>
 
 We suspected the players that played more minutes usually scored more.
 This plot confirms it and shows that the `FieldGoalPercentage` tends to the mean when players play a considerable amount of minutes: for players with less than 20 minutes per game (role players or occasional players), the percentage has a higher standard deviation, **0.12** to be precise, than for players with more than 20 minutes per game (**0.05**).
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png" alt="Figure 3.1: Missing values in the original dataset">
-	<figcaption style="color: #555555">Figure 3.1: Missing values in the original dataset</figcaption>
+	<figcaption>Figure 3.1: Missing values in the original dataset</figcaption>
 </figure>
 
 In this graph we obtain the percentage of values which are not available in the original dataset (the one dating back to 1950).
@@ -125,17 +125,17 @@ The undeniable setback is that because we use the `Turnovers` stats, we omit 20%
 But given how rapidly evolve sports&mdash;it is enough to watch a video from a gold medalist from the 1956 Olympics to notice the performance difference&mdash;we believe omitting that amount of observations is not a big deal, all things considered.
 As we already stated, the first valid observation dates back to 1978.
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png" alt="Figure 3.2: Number of missing variables per 'Year'">
-	<figcaption style="color: #555555">Figure 3.2: Number of missing variables per <code>Year</code></figcaption>
+	<figcaption>Figure 3.2: Number of missing variables per <code>Year</code></figcaption>
 </figure>
 
 In this case, we can observe the years in which the last variables started to appear.
 Until the 70's, the last two features were still not present.
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png" alt="Figure 4: Violin plot of the main features">
-	<figcaption style="color: #555555">Figure 4: Violin plot of the main features</figcaption>
+	<figcaption>Figure 4: Violin plot of the main features</figcaption>
 </figure>
 
 We decided to generate a violin of what we consider the 4 most important features: `Points`, `Rebounds`, `Assists` and `Minutes`.
@@ -150,9 +150,9 @@ Based on these facts, we supose the better they are, the more they play, which r
 This is taken into account positively when selecting whether he is All-NBA or not.
 Of course, as there are many more non-All-NBA than All-NBA, this does not mean that if a player plays more it is more likely to be All-NBA: from the 158 players with 40 or more minutes per game, only 49 (about one third of them) were selected to the All-NBA first or second team.
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png" alt="Figure 5: Density plot of the minutes">
-	<figcaption style="color: #555555">Figure 5: Density plot of the minutes</figcaption>
+	<figcaption>Figure 5: Density plot of the minutes</figcaption>
 </figure>
 
 Finally, we present a density plot of the minutes per game, to further insist in the fact that All-NBA players play more minutes than non All-NBA players, on average.
@@ -292,9 +292,9 @@ The R<sup>2</sup> indicates the percentage of the variance in the dependent vari
 This way it is clear that this model does not explain well the variable `isAllNBA`.
 Therefore, we can not make a correct analysis of the coefficients to see which variables are more important.
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotBadModel.png" alt="Figure 6: Residual analysis of the bad model">
-	<figcaption style="color: #555555">Figure 6: Residual analysis of the bad model</figcaption>
+	<figcaption>Figure 6: Residual analysis of the bad model</figcaption>
 </figure>
 
 Analizing the residuals we obtain the same conclusion: this model does not fit well.
@@ -342,9 +342,9 @@ The results are way better than in the previous model.
 We included `Points`, `Rebounds`, `Assists`, a negative version of `Fouls` and `Turnovers`&mdash;even though playing more time probably means more chances to make turnovers, we consider it something bad per se, hence we include it as negative&mdash;and `FieldGoalPercentage` multiplied by the categorical version of points (either `LOW`, `MEDIUM` or `HIGH`).
 The R<sup>2</sup> is now almost **1**, so we can start confidently interpreting how our features play a role in the amount of minutes played.
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotGoodModel.png" alt="Figure 7: Residual analysis of the good model">
-	<figcaption style="color: #555555">Figure 7: Residual analysis of the good model</figcaption>
+	<figcaption>Figure 7: Residual analysis of the good model</figcaption>
 </figure>
 
 But first, we wanted to compare the residual plot we made earlier with this new one.
@@ -361,9 +361,9 @@ As we can see the number is really big, so there's no room for other interpretat
 
 Let's observe now how are the predicted values compared to the real values of `Minutes`:
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictedVSreal.png" alt="Figure 8: Predicted values vs. Real values">
-	<figcaption style="color: #555555">Figure 8: Predicted values vs. Real values</figcaption>
+	<figcaption>Figure 8: Predicted values vs. Real values</figcaption>
 </figure>
 
 We obtain good results, indicating this model is objectively good to assess the number of minutes.
@@ -417,9 +417,9 @@ This is also understandable, as there are less training cases of `TRUE` players,
 
 Let's see the evolution of the parameter `k`, which was tuned using a grid search:
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png" alt="Figure 8: Predicted values vs. Real values">
-	<figcaption style="color: #555555">Figure 9: <code>k</code> parameter evolution</figcaption>
+	<figcaption>Figure 9: <code>k</code> parameter evolution</figcaption>
 </figure>
 
 The best accuracy is obtained with `k = 9`, but the difference is really small compared to other values.
@@ -432,9 +432,9 @@ It seems clear 1 and 2 are not the best values in this case, but others result i
 In this case, along with the prediction, we wanted to obtain a visual of a tree to illustrate the strength of this model, and how it discretizes between the two possible output classes.
 We obtained the following tree:
 
-<figure style="text-align: center">
+<figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png" alt="Figure 10: Decision Tree">
-	<figcaption style="color: #555555">Figure 10: Decision Tree</figcaption>
+	<figcaption>Figure 10: Decision Tree</figcaption>
 </figure>
 
 This gives us some key clues about our data.
