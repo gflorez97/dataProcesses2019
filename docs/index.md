@@ -2,11 +2,17 @@
 
 ## Students
 
-- Gonzalo Flórez Arias
-- Antonio González Sanz
-- Esaú García Sánchez-Torija
-- Adrián Rodríguez Socorro
-- Rafael Inés Guillén
+- [Gonzalo Flórez Arias][gonzalo]
+- [Antonio González Sanz][antonio]
+- [Esaú García Sánchez-Torija][esau]
+- [Adrián Rodríguez Socorro][adrian]
+- [Rafael Inés Guillén][rafael]
+
+[gonzalo]: https://github.com/gflorez97        "GitHub Profile — Gonzalo Flórez Arias"
+[antonio]: https://github.com/antoniogonzalezs "GitHub Profile — Antonio González Sanz"
+[esau]:    https://github.com/egasato          "GitHub Profile — Esaú García Sánchez-Torija"
+[adrian]:  https://github.com/ars1096          "GitHub Profile — Adrián Rodríguez Socorro"
+[rafael]:  https://github.com/RafaIG           "GitHub Profile — Rafael Inés Guillén"
 
 ## Abstract
 
