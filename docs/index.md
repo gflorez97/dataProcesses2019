@@ -248,10 +248,11 @@ It defines the number of nearest neighbors (to the data to predict) to be select
 The idea now is to apply a decision tree algorithm to visually appreciate how this algorithm discerns between the best players and the rest.
 In the result section we present a visualization of that tree and interpret it along with the prediction results.
 
-#### Random forest
+#### Random Forest
 
-Lastly, we tried to expand the decision tree algorithm and use a random forest. However, due to the high number of elements in our dataset, we couldn't train a big model unless we limited ourselves to a smaller dataset, from which, as will be presented in the following section, the results were worse than expected.
-
+Last bot not least, we expanded the decision tree algorithm and use a random forest.
+However, due to the high number of elements in our dataset, we could not train a big model unless we decreased the input to a subset of the dataset.
+This limitation resulted in prediction results way worse than we expected, as it will be presented in the following section.
 
 ## Results
 
