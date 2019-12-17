@@ -146,7 +146,7 @@ The `Rebounds` and `Assists` plots are more interesting, as it is not that clear
 In fact, there are more All-NBA players in the lower zone for assists than in the upper one, although non All-NBA players tend to have a small number of assists.
 Finally, it is clear that although the play time of non-All-NBA players is distributed evenly, that is not the case for most of the All-NBA players, where play time is over 30 minutes per game.
 
-Based on these facts, we supose the better they are the more they play, which results in more opportunities to improve their statistics.
+Based on these facts, we supose the better they are, the more they play, which results in more opportunities to improve their statistics.
 This is taken into account positively when selecting whether he is All-NBA or not.
 Of course, as there are many more non-All-NBA than All-NBA, this does not mean that if a player plays more it is more likely to be All-NBA: from the 158 players with 40 or more minutes per game, only 49 (about one third of them) were selected to the All-NBA first or second team.
 
@@ -179,13 +179,13 @@ We tried to create a linear model, using the function ```lm```, to try assessing
 Using the next formula, we wanted to obtain the model that maximized the R<sup>2</sup> value, as it is a metric of the strength of our model in describing the features.
 After finding such model, we can study the significance of each of the features in it, to discover which ones are the most important for our variable of interest.
 
-``` r
+```r
 model <- lm(isAllNBACuant ~ FEATURES, data = nbaFinalLM)
 ```
 
 We tried several ways, but could not obtain a high R<sup>2</sup> value, even when including all the features, squared versions of the features we considered most important (e.g. `Minutes` and `Points`), or by transforming continuous features into 3 categorical values:
 
-``` r
+```r
 nbaFinalLM$minutesCuant <- NA
 nbaFinalLM$minutesCuant[nbaFinalLM$Minutes <= 15] <- "LOW"
 nbaFinalLM$minutesCuant[ 15 < nbaFinalLM$Minutes & nbaFinalLM$Minutes <= 30] <- "MEDIUM"
@@ -260,7 +260,7 @@ This limitation resulted in prediction results way worse than we expected, as it
 
 Here we present an example of a model summary using `isAllNBA` as the outcome of interest:
 
-``` r
+```r
 Call:
 lm(formula = isAllNBACuant ~ pointsCuant + Rebounds + Assists + 
     Steals + Blocks + Minutes, data = nbaFinalLM)
@@ -308,7 +308,7 @@ As we still wanted to prove our hypothesis regarding the strength of relationshi
 To do so, we made the initial assumption that players that play more play better and make more numbers, and that those with good numbers start playing more.
 Taking that into account, and after studying which features could help us, we created the next model:
 
-``` r
+```r
 Call:
 lm(formula = Minutes ~ Points + Rebounds + Assists + Turnovers * 
     -1 + Fouls * -1 + FieldGoalPercentage * pointsCuant, data = nbaFinalLM)
@@ -374,11 +374,11 @@ We obtain good results, indicating this model is objectively good to assess the 
 
 ### Prediction
 
-After presenting the trained models to the test set to predict, we obtained the following results:
+After presenting the trained models to the test set to predict, we obtained the results explained in each subsection.
 
-#### K-nearest neighbors
+#### K-Nearest Neighbors
 
-We compute the confusion matrix and generate some basic statistics to better analyze the results:
+We compute the confusion matrix and generate some basic statistics to better analyze the results.
 
 ```r
 Confusion Matrix and Statistics
@@ -407,21 +407,42 @@ Prediction FALSE TRUE
       Balanced Accuracy : 0.8526  
 ```
 
-In our case, as this is a classification problem, we are mostly looking at the accuracy (or the confidence intervals for it), the sensitivity and the specificity. The accuracy is really good: 3857 of 3910 players were correctly predicted, and most of the errors were all nba players predicted as not all nba players (logical, as there are way more FALSE than TRUE, the model tends to select more FALSE). Sensitivity, in this case, refers to the number of predicted FALSE players divided by the total real number of FALSE players: it states how well our model predict a player is not an all nba, taking into account all the players that really are all nba. On the other hand, the specificity refers to the number of predicted TRUE players, divided by the correct total of TRUE players. This number is smaller, which means some TRUE players were predicted as FALSE. This is also logical, as there are less training cases of TRUE players, the model fails sometimes to detect a player as TRUE.
+In this case, as this is a classification problem, we are mostly looking at the accuracy (or the confidence intervals), the sensitivity and the specificity.
+The accuracy is really good: 3,857 out of 3,910 players were correctly predicted, and most of the errors were All-NBA players predicted as not All-NBA players.
+This is understandable, as there are way more `FALSE` than `TRUE`, the model tends to select more `FALSE`.
+Sensitivity, in this case, refers to the number of predicted `FALSE` players divided by the total real number of `FALSE` players: it states how well our model predict a player is not an All-NBA, taking into account all the players that really are All-NBA.
+On the other hand, the specificity refers to the number of predicted `TRUE` players, divided by the correct total of `TRUE` players.
+This number is smaller, which means some `TRUE` players were predicted as `FALSE`.
+This is also understandable, as there are less training cases of `TRUE` players, the model fails sometimes to detect a player as `TRUE`.
 
-Let's see the evolution of the k parameter, which was tuned used a grid search:
+Let's see the evolution of the parameter `k`, which was tuned using a grid search:
 
-![k parameter evolution](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png "k parameter evolution")
+<figure style="text-align: center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png" alt="Figure 8: Predicted values vs. Real values">
+	<figcaption style="color: #555555">Figure 9: <code>k</code> parameter evolution</figcaption>
+</figure>
 
-The best accuracy is obtained at k=9, but the difference is really small between this and other values. It seems clear 1 and 2 are not the best values in this case, but any of the others result in similar results.
+The best accuracy is obtained with `k = 9`, but the difference is really small compared to other values.
+It seems clear 1 and 2 are not the best values in this case, but others result in similar outputs.
 
-#### Decision tree
+[figure-9]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png "Figure 9: 'k' parameter evolution"
 
-In this case, along with the prediction, we wanted to obtain a visual of a tree to illustrate the strength of this model, and how it discretizes between the two possible classes. We got the following tree:
+#### Decision Tree
 
-![Decision Tree](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictionTree.png "Decision Tree")
+In this case, along with the prediction, we wanted to obtain a visual of a tree to illustrate the strength of this model, and how it discretizes between the two possible output classes.
+We obtained the following tree:
 
-This gives us some key clues about our data. The first discriminant feature is Points: if a player scored more than 23, he is most likely to be an all nba (the more blue, the more likely to select TRUE, and vice versa for red), and if he scored more than 27, even more; finally, TRUE will be considered if there were more than 5 rebounds. Let's study another path: for players with less than 23 points, assist number is heavily weighted: if they have less than 10 (that is, not scorer players who aren't also great passers) they are most probably not an all nba. But, if they are good passers, the decision divides between more or less than 14 points: the tree tell us less than 14 points is a really low number, even for a non mainly scorer (like a play-making point guard), and thus he is probably not an all nba.
+<figure style="text-align: center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png" alt="Figure 10: Decision Tree">
+	<figcaption style="color: #555555">Figure 10: Decision Tree</figcaption>
+</figure>
+
+This gives us some key clues about our data.
+The first discriminant feature is `Points`: if a player scored more than 23, he is more likely to be an All-NBA&mdash;the more blue, the more likely to select `TRUE`, and the more red, the more likely to select `FALSE`&mdash;and if he scored more than 27, even more; finally, it will be considered `TRUE` if there were more than 5 rebounds.
+
+If we take another path, the reasoning changes.
+For players with less than 23 points, assist number is heavily weighted: if they have less than 10 (that is, non-scorer players who are not either great passers) they are more probably not an All-NBA.
+But, if they are good passers, the decision divides between more or less than 14 points: the tree shows that less than 14 points is a really low number, even for a non-mainly scorer (like a play-making point guard), therefore he is probably not an All-NBA.
 
 ```r
 Confusion Matrix and Statistics
@@ -451,6 +472,8 @@ Prediction FALSE TRUE
 ```
 
 There are no major changes between this and the k-nearest neighbor, neither in the accuracy nor in the sensitivity or specificity.
+
+[figure-10]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictionTree.png "Figure 10: Decision Tree"
 
 #### Random forest
 
@@ -483,10 +506,17 @@ Prediction FALSE  TRUE
       Balanced Accuracy :     NA          
 ```
 
-Why, if the accuracy is still high? Because now every value is assigned to FALSE. By that, most of the data is correctly classified, as there are way more FALSE than TRUE, but this only assumes that any player is not an all nba, which is a dull prediction. We guess this happens because of the reduced training set, or because this algorithm can't fit well our model with the parameters selected (we used the 'cforest' method from the caret package).
+Why, if the accuracy is still high?
+Because now every value is assigned to `FALSE`.
+Due to that, the majority the data is correctly classified, as there are way more `FALSE` than `TRUE`, but this only assumes that any player is not an All-NBA, which is a dull prediction.
+We guess this happens because of the reduced training set, or because this algorithm cannot fit well our model with the parameters selected (we used the `cforest` method from the package `caret`).
 
 ## Discussion and Future Work
 
-Based on the results presented in the strength of relationships and prediction sections, we can estimate this analysis would be useful in drafting and trading NBA players between teams. NBA teams could even use our models in the case of injured players that need a replacement. Taking into consideration the accuracy obtained in our models, specially in the prediction section, we can definitely conclude whether a certain player would be one of the best 10 players in the league. Despite all those implications, we were unable to find a good model for the strength of relationships section.
+Based on the results presented in the strength of relationships and prediction sections, we can estimate this analysis would be useful in drafting and trading NBA players between teams.
+NBA teams could even use our models in the case of injured players that need a substitute.
+Taking into consideration the accuracy obtained in our models, specially in the prediction section, we can definitely conclude whether a certain player would be one of the best 10 players in the league.
+Despite all those implications, we were unable to find a good model for the strength of relationships section.
 
-We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (for example, number of followers in social media), participations in all star events (dunk contest, three-point contest, skill challenge)... We can also extrapolate our models to other sports, changing the features with the main statistics of those sports, to analyze the better players. 
+We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (e.g. number of followers in social media accounts), participations in All-Star events (dunk contest, three-point contest, skill challenge), etc.
+We can also extrapolate our models to other sports, changing the features with the main statistics of those sports, to analyze the best players.
