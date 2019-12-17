@@ -62,32 +62,42 @@ Regardless of the fact that some positions might have better players than others
 
 ## Exploratory Data Analysis
 
-- Introduces the dataset by describing the origin (source) and structure (shape, relevant features) of the data being used (**5 points**)
+To answer the question of interest, we needed two things: the NBA seasons of the players (e.g. Jordan at age 21, Jordan at age 22 and so on) with his main statistics, and whether that season resulted in a first or second All-NBA selection for that player.
+When we started this project, we proposed using a [Kaggle dataset][kaggle].
+It contains the stats we needed, but it does not contain any feature that allows us to know whether a given player had an All-NBA selection.
+Then, we used the package [`nbaStatR`][nbastatr] of the R programming language to gather&mdash;from the [NBA API][nba-api]&mdash;a dataset with every player who was selected in any All-NBA team.
+This was enough to generate the final dataset we needed.
 
-For answering the question of interest, we needed two things: every NBA season for each player (Jordan at age 21, Jordan at age 22, Jordan at age 23...) with his main statistics, and whether that season resulted in a first or second all nba selection for that player. When starting this project, we proposed using a [Kaggle dataset](https://www.kaggle.com/drgilermo/nba-players-stats) that contained the stats we needed for every player, but it didn't contain any feature to know if that player had an all nba selection. Then, we used the R package [nbaStatR](https://github.com/abresler/nbastatR) to gather, from the [NBA API](https://stats.nba.com), a dataset with every player who was selected in any all nba team.
+The generation was not a straightforward process, as it required data wrangling.
+We filtered the All-NBA selections with players either in the first or second All-NBA; pre-processing the datasets was necessary to join both datasets.
+The goal was to obtain in the statistics dataset a new variable `isAllNBA`, which will be the categorical variable on which we based our analysis.
+We selected the columns relevant columns, transforming some of the thoguhtout the process, because we wanted stats to be applied per game and not per season.
+To conclude, we omitted the rows that contained `NA` values.
+The reason some stats were not tracked is because, until a certain date, nobody thought they would be useful to create insightful analyses, so some of the stats used were not collected until 1978.
+This was the only solution because the source of all these stats were manual in-game annotations, dating back to 1950, so statistics that were not tracked back then, e.g. the number of blocks, cannot be accurately inferred now.
 
-After that, we used R to generate the final dataset we wanted. For this, we filtered the all nba selections with just players in either first or second all nba; we joined both datasets, after a bit of pre-processing, to obtain in the statistics dataset a new variable, isAllNBA, which will be the categorical variable on which we will base our analysis; we took only the columns we wanted, adapting some of the from the original because we wanted stats to be applied per game, and not per season. Finally, we wanted to just omit every NA value, as some of the stats used weren't collected until 1978. The source of all these stats are manual in-game annotations, dating back to 1950, and so statistics that were not tracked then, as the number of blocks, can't be tracked now.
-
-Our final dataset, that can be viewed [here](https://github.com/gflorez97/dataProcesses2019/blob/master/Final%20Project/data/nbaFinal.csv), consists of 19554 observations of 14 variables, which are:
-- **X**: just a nominal variable for each row.
-- **isAllNBA**: TRUE if that player in that season was a first or second all nba.
+Our [final dataset][dataset] ([raw][dataset-raw]), consists of 19,554 observations with 14 variables.
+A brief description of the variables is found below:
+- **X**: a nominal variable for each row.
+- **isAllNBA**: whether that player in that season was a first or second All-NBA.
 - **Year**: the year of the season.
 - **Player**: the name of the player.
 - **Position**: the position played during that year by that player.
-- **Rebounds**: rebounds per game of that player (adjusted to integer numbers)
-- **Assists**: assists per game of that player (adjusted to integer numbers)
-- **Blocks**: blocks per game of that player (adjusted to integer numbers)
-- **Steals**: steals per game of that player (adjusted to integer numbers)
-- **Points**: points per game of that player (adjusted to integer numbers)
-- **Turnovers**: turnovers per game of that player (adjusted to integer numbers)
-- **FieldGoalPercentage**: ratio of made shots by total shots (adjusted to [0,1])
-- **Minutes**: minutes played per game of that player (adjusted to integer numbers)
-- **Fouls**: fouls committed per game of that player (adjusted to integer numbers)
+- **Rebounds**: rebounds per game of the player (adjusted to integer numbers)
+- **Assists**: assists per game of the player (adjusted to integer numbers)
+- **Blocks**: blocks per game of the player (adjusted to integer numbers)
+- **Steals**: steals per game of the player (adjusted to integer numbers)
+- **Points**: points per game of the player (adjusted to integer numbers)
+- **Turnovers**: turnovers per game of the player (adjusted to integer numbers)
+- **FieldGoalPercentage**: ratio of made shots by total shots (adjusted to `[0, 1]`)
+- **Minutes**: minutes played per game of the player (adjusted to integer numbers)
+- **Fouls**: fouls committed per game of the player (adjusted to integer numbers)
 
-- Creates 5 well designed and formatted graphics (**15 points**, 3 each)
-  - The visual uses the appropriate visual encodings based on the data type (**1 point**)
-  - Written interpretation of graphic is provided (**1 point**)
-  - Clear axis labels, titles, and legends are included, where appropriate (**1 point**)
+[kaggle]:      https://www.kaggle.com/drgilermo/nba-players-stats                                                     "Kaggle — NBA Player Stats Since 1950"
+[nbastatr]:    https://github.com/abresler/nbastatR                                                                   "GitHub — abresler/nbastatR — NBA Stats API Wrapper and more for R"
+[nba-api]:     https://stats.nba.com                                                                                  "NBA API"
+[dataset]:     https://github.com/gflorez97/dataProcesses2019/blob/master/Final%20Project/data/nbaFinal.csv           "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset"
+[dataset-raw]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/data/nbaFinal.csv "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset (RAW)"
 
 We present below 5 graphics to illustrate our dataset:
 
