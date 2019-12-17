@@ -196,45 +196,46 @@ More information is given in the next section as well as the explanation of why 
 
 ### Prediction
 
-The idea now is to be able to predict if a player season is one of the 10 best in the league, using our features. This is a classification problem, in which there are two classes (TRUE and FALSE). We will directly use the cleaned dataset without modifications, as we already handled missing values in previous sections.
+The main idea is to predict whether a player in a given season is one of the top 10 best in the league, using our features.
+This is a classification problem where there are only two output classes (`TRUE` and `FALSE`).
+We will use the pre-processed dataset without modifications, as we already handled the missing values in previous sections.
 
-First, we treat our isAllNBA variable as a factor (this is going to be the only categorical variable we are using), and create a data partition to split our data into testing and training data. We decided to use 80% for training and 20% for test, which is a reasonable partition for our dataset size.
+First, we treat our `isAllNBA` variable as a factor&mdash;this will be the only categorical variable we will be using&mdash;and create a data partition to split the data into testing and training data.
+We decided to use 80% of the observations for training and 20% for test, which is a reasonable partition size given our dataset size.
 
 ```r
 nbaFinal$isAllNBA <- factor(nbaFinal$isAllNBA)
-
-trainIndex <- createDataPartition(nbaFinal$isAllNBA,
-                                  p = .8,
-                                  list = FALSE,
-                                  times = 1)
-
-training_set <- nbaFinal[ trainIndex, ]
-test_set <- nbaFinal[ -trainIndex, ]
+trainIndex <- createDataPartition(nbaFinal$isAllNBA, p = .8, list = FALSE, times = 1)
+training_set <- nbaFinal[trainIndex, ]
+test_set <- nbaFinal[-trainIndex, ]
 ```
 
-Now that we have our training and test set, we prepare our train function (we will use the train function from the caret package). For this, we need to declare that we are using cross validation (with 10 folds) for training:
+Once the training and test sets are defined, the next step is to prepare the train function, that is to say, configure some of the parameters for the actual training process.
+Because we will use the function `train` from the package `caret`, this is done with the function `trainControl` from the very same package.
+We need to declare that we will use cross-validation (with 10 folds) during the training process:
 
 ```r
 fitControl <- trainControl(
-  method = "cv",
-  number = 10,
-  savePredictions = TRUE
+	method = "cv",
+	number = 10,
+	savePredictions = TRUE
 )
 ```
 
-A grid parameter is also used used for each technique, in order to optimize the parameters each machine learning technique uses. For example, for the K-nearest neighbors:
+A grid parameter is also used used for each technique to optimize the parameters each machine learning technique uses.
+For example, for the K-nearest neighbors we need to find the optimal value for `k`, so we will do the following to try different values:
 
 ```r
 grid <- expand.grid(k = 1:20)
 ```
 
-The model used in this section uses the following features:
+The model used in this section uses the following features described as a formula in R:
 
 ```r
 isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes
 ```
 
-Moving forward, we present the algorithms we have used for this machine learning section:
+In the next subsections, we present the algorithms we have used for this machine learning procedure.
 
 #### K-nearest neighbors
 
