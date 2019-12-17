@@ -250,7 +250,7 @@ In the result section we present a visualization of that tree and interpret it a
 
 #### Random Forest
 
-Last bot not least, we expanded the decision tree algorithm and use a random forest.
+Last but not least, we expanded the decision tree algorithm and use a random forest.
 However, due to the high number of elements in our dataset, we could not train a big model unless we decreased the input to a subset of the dataset.
 This limitation resulted in prediction results way worse than we expected, as it will be presented in the following section.
 
