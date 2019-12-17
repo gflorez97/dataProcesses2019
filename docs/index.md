@@ -33,20 +33,20 @@ Specially in american sports, as it has been the norm for many years to gather a
 The goal is being able to tell how are sports evolving and which young players should be scouted, to try predicting who is going to be the new Jordan, the new Brady or the new Trout.
 
 The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States of America, commonly known with the acronym NBA.
-We have chosen this topic for numerous reasons: we believe it is an interesting domain&mdash;not only for us but for the general public&mdash;, the amount of data is constantly increasing as everyday new games are played and more data is collected, and having the power of analyzing all the data properly is becoming an increasingly higher priority for the professional teams.
+We have chosen this topic for numerous reasons: we believe it is an interesting domain&mdash;not only for us but for the general public&mdash;the amount of data is constantly increasing as everyday new games are played and more data is collected, and having the power of analyzing all the data properly is becoming an increasingly higher priority for the professional teams.
 On top of that, it iss a sport we enjoy watching and we tend to be up-to-date with the different sources of NBA news, therefore we can compare the results of our analysis with our previous knowledge, helping us to better understand the unwritten rules behind this sport; similarly, this topic is explored in the film [Moneyball][moneyball].
 
 We will try answering the following question: _**what makes a player be one of the 10 best players in the NBA in a particular year?**_
 
-To tackle this problem, we decided to focus in the [All NBA][all-nba] selection.
-This annual selection consists in a voting&mdash;conducted by sportswriters and broadcasters throughout the United States of America and Canada&mdash;, in which the best players of the season are selected.
+To tackle this problem, we decided to focus in the [All-NBA][all-nba] selection.
+This annual selection consists in a voting&mdash;conducted by sportswriters and broadcasters throughout the United States of America and Canada&mdash;in which the best players of the season are selected.
 We used the first and second All-NBA team, that is, the 10 best players in each year.
 Regardless of the fact that some positions might have better players than others, we are mostly getting 3 to 4 guards, 4 to 5 forwards and 1 to 3 centers per year.
 
 [moneyball]: https://en.wikipedia.org/wiki/Moneyball_(film) "Wikipedia — Moneyball (film)"
 [all-nba]:   https://en.wikipedia.org/wiki/All-NBA_Team     "Wikipedia — All-NBA Team"
 
-### Related Work 
+### Previous Work
 
 - [Bhandari, Colet, Parker, Pines, Pratap, Ramanujam (1997). Advanced Scout: Data Mining and Knowledge Discovery in NBA Data. Data Mining and Knowledge Discovery, 1, pp.121–125.][advanced-scout]
 - [Goldsberry (2012). CourtVision: New Visual and Spatial Analytics for the NBA. MIT Sloan Sports Analytics Conference][visual-spatial-analytics]
@@ -93,39 +93,84 @@ A brief description of the variables is found below:
 - **Minutes**: minutes played per game of the player (adjusted to integer numbers)
 - **Fouls**: fouls committed per game of the player (adjusted to integer numbers)
 
-[kaggle]:      https://www.kaggle.com/drgilermo/nba-players-stats                                                     "Kaggle — NBA Player Stats Since 1950"
-[nbastatr]:    https://github.com/abresler/nbastatR                                                                   "GitHub — abresler/nbastatR — NBA Stats API Wrapper and more for R"
-[nba-api]:     https://stats.nba.com                                                                                  "NBA API"
-[dataset]:     https://github.com/gflorez97/dataProcesses2019/blob/master/Final%20Project/data/nbaFinal.csv           "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset"
-[dataset-raw]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/data/nbaFinal.csv "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset (RAW)"
-
 We present below 5 graphics to illustrate our dataset:
 
-![Graph 1: Histograms of features](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png "Graph 1: Histograms of features")
+<figure align="center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png" alt="Figure 1: Histograms of features">
+	<figcaption style="color: #444444">Figure 1: Histograms of features</figcaption>
+</figure>
 
-These histograms represent, at a glance, how our features are distributed. We can see Points, Rebounds, Assists, Blocks, Steals and Turnovers are left-skewed distributions, as most players are in the lower-end of all those stats, and just the best players in each area (except for Turnovers, which is a negative stat) peak with the greater values. The Field Goal Percentage seems to follow a normal distribution, with a mean of **0.44**, and some obvious outliers in 0 and 1 (in most cases, associated with players that played just a few minutes in a season, and probably shot just 1 or 2 times and either scored or failed those shots). The Fouls feature tells us most players commit 1 or 2 fouls per game, and the Minutes feature is more evenly distributed, as there are more or less the same number of key players as role players and occasional players in the league.
+These histograms represent, at first sight, how the features are distributed.
+It is noticeable that `Points`, `Rebounds`, `Assists`, `Blocks`, `Steals` and `Turnovers` are left-skewed distributions, as most players are in the lower-end of all those stats and just the best players in each area outstand peak with the highest values (with the exception of `Turnovers`, which is a negative stat).
+The `FieldGoalPercentage` seems to follow a normal distribution with a mean of **0.44** and some obvious outliers in `0` and `1`&mdash;in most cases, associated with players that played just a few minutes in a season, and probably shot a few times and either scored or failed those shots).
+The `Fouls` feature is quite left-skweded, because most players commit between 1 and 2 fouls per game, whereas the `Minutes` feature is distributed more evenly, because the overall amount of key players, role players and occasional players in the league is approximately the same.
 
+<figure align="center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png" alt="Figure 2: 'Points' by 'FieldGoalPercentage', colored by 'Minutes'">
+	<figcaption style="color: #444444">Figure 2: <code>Points</code> by <code>FieldGoalPercentage</code>, colored by <code>Minutes</code></figcaption>
+</figure>
 
-![Graph 2: Points by FieldGoalPercentage, colored by Minutes](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png "Graph 2: Points by FieldGoalPercentage, colored by Minutes")
+We suspected the players that played more minutes usually scored more.
+This plot confirms it and shows that the `FieldGoalPercentage` tends to the mean when players play a considerable amount of minutes: for players with less than 20 minutes per game (role players or occasional players), the percentage has a higher standard deviation, **0.12** to be precise, than for players with more than 20 minutes per game (**0.05**).
 
-We already supposed the players that played more minutes usually scored more. This plot confirms this, while also telling us that Field Goal Percentage tends to the mean when players play lots of minutes: for players with less than 20 minutes per game (role players or occasional players), the percentage has a higher standard deviation (**0.12**),  than for players with more than 20 minutes per game (**0.05**).
+<figure align="center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png" alt="Figure 3.1: Missing values in the original dataset">
+	<figcaption style="color: #444444">Figure 3.1: Missing values in the original dataset</figcaption>
+</figure>
 
-![Graph 3: Missing values in the original dataset](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png "Graph 3: Missing values in the original dataset")
+In this graph we obtain the percentage of values which are not available in the original dataset (the one dating back to 1950).
+The position of the player or whether he was an All-NBA is something that has been collected since then.
+However, some game stats, like blocks or turnovers, were not computed until recently, hence the imposibility to use the whole dataset.
+The undeniable setback is that because we use the `Turnovers` stats, we omit 20% of the players in the history of NBA.
+But given how rapidly evolve sports&mdash;it is enough to watch a video from a gold medalist from the 1956 Olympics to notice the performance difference&mdash;we believe omitting that amount of observations is not a big deal, all things considered.
+As we already stated, the first valid observation dates back to 1978.
 
-In this graph we obtain the percentage of values which are not available in the original dataset (the one dating back from 1950). As we can see, the position of the player or if he was an all nba is something that has been collected since them, but some game stats, like blocks or turnovers, where not computed until recent years, and thus should not be valid if we used the whole dataset. In the worst case, Turnovers, we are losing a 20% of the total number of players in the history of NBA, which doesn't sound too bad, all things considered. As we already stated, the first year we consider in our cleaned dataset is 1978.
+<figure align="center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png" alt="Figure 3.2: Number of missing variables per 'Year'">
+	<figcaption style="color: #444444">Figure 3.2: Number of missing variables per <code>Year</code></figcaption>
+</figure>
 
-![Graph 3_2: Number of missing variables per year](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png "Graph 3_2: Number of missing variables per year")
+In this case, we can observe the years in which the last variables started to appear.
+Until the 70's, the last two features were still not present.
 
-In this case, we can observe the years in which the last variables started to appear. Until the 70's, the last two features where still not present.
+<figure align="center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png" alt="Figure 4: Violin plot of the main features">
+	<figcaption style="color: #444444">Figure 4: Violin plot of the main features</figcaption>
+</figure>
 
-![Graph 4: Violin plot of the main features](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png "Graph 4: Violin plot of the main features")
+We decided to generate a violin of what we consider the 4 most important features: `Points`, `Rebounds`, `Assists` and `Minutes`.
+This type of plot is really helpful to distinguish the distribution of the aforementioned features based on the categorical variable `isAllNBA`.
+When it comes to `Points`, we can observe most players lie in the interval `[15, 30]`.
+There are some outliers with more than 30&mdash;these are the all-time great scorers like Michael Jordan or Kobe Bryant&mdash;and a few players with less than 15&mdash;these are, in most cases, great defensive players like Ben Wallace&mdash;with higher numbers for rebounds, blocks and steals.
+The `Rebounds` and `Assists` plots are more interesting, as it is not that clear what the difference is.
+In fact, there are more All-NBA players in the lower zone for assists than in the upper one, although non All-NBA players tend to have a small number of assists.
+Finally, it is clear that although the play time of non-All-NBA players is distributed evenly, that is not the case for most of the All-NBA players, where play time is over 30 minutes per game.
 
-We decided to show a violin plot for 4 of the most important features (in our opinion, we'll ensure that in the next section): Points, Rebounds, Assists and Minutes. This type of plot is really useful to distinguish between our categorical variable, showing us the distribution of each variable depending on if the isAllNBA variable is TRUE or FALSE. For Points, we can observe most players lie between the 15 and 30 zone, with some outliers of players with more than 30 (all time great scorers like Michael Jordan or Kobe Bryant), and a few players with less than 15 (in most cases, great defensive players like Ben Wallace, with higher numbers for rebounds, blocks and steals). The Rebounds and Assists plots are more interesting, as it is not that clear that there is a real difference. In fact, there are more all nba players in the lower zone for assists than in the upper one, although non all nba players tend to have a small number of assists. Finally, it is clear that, while for non all nba players the minutes plot is more or less evenly distributed, most all nba play more than 30 minutes per game. From that we can suppose they play more because they are better, and playing more let them get better statistics. That is finally computed positively when being selected to the All NBA. Of course, as there are many more non All NBA than All NBA, this doesn't mean if a player plays more it is more likely he is an All NBA: from the 158 players with 40 or more minutes per game, only 49 (about one third of them) were selected to the All NBA first or second team.
+Based on these facts, we supose the better they are the more they play, which results in more opportunities to improve their statistics.
+This is taken into account positively when selecting whether he is All-NBA or not.
+Of course, as there are many more non-All-NBA than All-NBA, this does not mean that if a player plays more it is more likely to be All-NBA: from the 158 players with 40 or more minutes per game, only 49 (about one third of them) were selected to the All-NBA first or second team.
 
-![Graph 5: Density plot of the minutes](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png "Graph 5: Density plot of the minutes")
+<figure align="center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png" alt="Figure 5: Density plot of the minutes">
+	<figcaption style="color: #444444">Figure 5: Density plot of the minutes</figcaption>
+</figure>
 
-Finally, we present a density plot of the minutes per game, to further insist in the fact than all NBA players play more minutes than non all NBA players, on average. This doesn't mean, as we already stated, that there are more all nba players playing lots of minutes than non all nba, it's just that players with less than 30 minutes are very less likely to be selected to the all nba. 
-  
+Finally, we present a density plot of the minutes per game, to further insist in the fact that All-NBA players play more minutes than non All-NBA players, on average.
+Again, this does not mean, as we already stated, that there are more All-NBA players playing lots of minutes than non-All-NBA.
+It just means that players with less than 30 minutes of play time have lower probabilities of being selected to the All-NBA.
+
+[kaggle]:      https://www.kaggle.com/drgilermo/nba-players-stats                                                       "Kaggle — NBA Player Stats Since 1950"
+[nbastatr]:    https://github.com/abresler/nbastatR                                                                     "GitHub — abresler/nbastatR — NBA Stats API Wrapper and more for R"
+[nba-api]:     https://stats.nba.com                                                                                    "NBA API"
+[dataset]:     https://github.com/gflorez97/dataProcesses2019/blob/master/Final%20Project/data/nbaFinal.csv             "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset"
+[dataset-raw]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/data/nbaFinal.csv   "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset (RAW)"
+[graph-1]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png   "Figure 1: Histograms of features"
+[graph-2]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png   "Figure 2: 'Points' by 'FieldGoalPercentage', colored by 'Minutes'"
+[graph-3-1]:   https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png   "Figure 3.1: Missing values in the original dataset"
+[graph-3-2]:   https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png "Figure 3.2: Number of missing variables per 'Year'"
+[graph-4]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png   "Figure 4: Violin plot of the main features"
+[graph-5]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png   "Figure 5: Density plot of the minutes"
+
 ## Methods
 
 ### Strength of relationships
