@@ -24,8 +24,6 @@ Finally, we used a machine learning approach to try predicting whether a certain
 
 ## Introduction and Related Work
 
-- Provides a clear motivation for answering a _specific_ data driven question of interest (**5 points**)
-  
 ### Introduction
 
 Nowadays, stats are everywhere.
@@ -48,7 +46,7 @@ Regardless of the fact that some positions might have better players than others
 [moneyball]: https://en.wikipedia.org/wiki/Moneyball_(film) "Wikipedia — Moneyball (film)"
 [all-nba]:   https://en.wikipedia.org/wiki/All-NBA_Team     "Wikipedia — All-NBA Team"
 
-### Previous works: 
+### Related Work 
 
 - [Bhandari, Colet, Parker, Pines, Pratap, Ramanujam (1997). Advanced Scout: Data Mining and Knowledge Discovery in NBA Data. Data Mining and Knowledge Discovery, 1, pp.121–125.][advanced-scout]
 - [Goldsberry (2012). CourtVision: New Visual and Spatial Analytics for the NBA. MIT Sloan Sports Analytics Conference][visual-spatial-analytics]
