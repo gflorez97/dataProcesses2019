@@ -1,4 +1,4 @@
-<h1 align="center">Final Project Data Processes 2019</h1>
+<h1 style="text-align: center">Final Project Data Processes 2019</h1>
 
 ## Students
 
@@ -36,11 +36,11 @@ The selected domain of interest for this project is basketball, and in particula
 We have chosen this topic for numerous reasons: we believe it is an interesting domain&mdash;not only for us but for the general public&mdash;the amount of data is constantly increasing as everyday new games are played and more data is collected, and having the power of analyzing all the data properly is becoming an increasingly higher priority for the professional teams.
 On top of that, it iss a sport we enjoy watching and we tend to be up-to-date with the different sources of NBA news, therefore we can compare the results of our analysis with our previous knowledge, helping us to better understand the unwritten rules behind this sport; similarly, this topic is explored in the film [Moneyball][moneyball].
 
-We will try answering the following question: _**what makes a player be one of the 10 best players in the NBA in a particular year?**_
+We will try answering the following question: _**what makes a player be one of the top 10 best players in the NBA in a particular year?**_
 
 To tackle this problem, we decided to focus in the [All-NBA][all-nba] selection.
 This annual selection consists in a voting&mdash;conducted by sportswriters and broadcasters throughout the United States of America and Canada&mdash;in which the best players of the season are selected.
-We used the first and second All-NBA team, that is, the 10 best players in each year.
+We used the first and second All-NBA team, that is, the top 10 best players in each year.
 Regardless of the fact that some positions might have better players than others, we are mostly getting 3 to 4 guards, 4 to 5 forwards and 1 to 3 centers per year.
 
 [moneyball]: https://en.wikipedia.org/wiki/Moneyball_(film) "Wikipedia — Moneyball (film)"
@@ -164,18 +164,18 @@ It just means that players with less than 30 minutes of play time have lower pro
 [nba-api]:     https://stats.nba.com                                                                                    "NBA API"
 [dataset]:     https://github.com/gflorez97/dataProcesses2019/blob/master/Final%20Project/data/nbaFinal.csv             "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset"
 [dataset-raw]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/data/nbaFinal.csv   "GitHub — gflorez97/dataProcesses2019 — Data Processes Project — NBA Dataset (RAW)"
-[graph-1]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png   "Figure 1: Histograms of features"
-[graph-2]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png   "Figure 2: 'Points' by 'FieldGoalPercentage', colored by 'Minutes'"
-[graph-3-1]:   https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png   "Figure 3.1: Missing values in the original dataset"
-[graph-3-2]:   https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png "Figure 3.2: Number of missing variables per 'Year'"
-[graph-4]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png   "Figure 4: Violin plot of the main features"
-[graph-5]:     https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png   "Figure 5: Density plot of the minutes"
+[figure-1]:    https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png   "Figure 1: Histograms of features"
+[figure-2]:    https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png   "Figure 2: 'Points' by 'FieldGoalPercentage', colored by 'Minutes'"
+[figure-3-1]:  https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png   "Figure 3.1: Missing values in the original dataset"
+[figure-3-2]:  https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png "Figure 3.2: Number of missing variables per 'Year'"
+[figure-4]:    https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png   "Figure 4: Violin plot of the main features"
+[figure-5]:    https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png   "Figure 5: Density plot of the minutes"
 
 ## Methods
 
-### Strength of relationships
+### Strength of Relationships
 
-We tried to create a linear model, using the function ```lm```, to try assessing the strength of relationships in our dataset related to whether a player is one of the 10 best of a year.
+We tried to create a linear model, using the function ```lm```, to try assessing the strength of relationships in our dataset related to whether a player is one of the top 10 best of a year.
 Using the next formula, we wanted to obtain the model that maximized the R<sup>2</sup> value, as it is a metric of the strength of our model in describing the features.
 After finding such model, we can study the significance of each of the features in it, to discover which ones are the most important for our variable of interest.
 
@@ -256,9 +256,9 @@ This limitation resulted in prediction results way worse than we expected, as it
 
 ## Results
 
-### Strength of relationships
+### Strength of Relationships
 
-Here we present an example of a generated model summary, when using isAllNBA as the outcome of interest:
+Here we present an example of a model summary using `isAllNBA` as the outcome of interest:
 
 ``` r
 Call:
@@ -287,15 +287,26 @@ Multiple R-squared:  0.3117,	Adjusted R-squared:  0.3114
 F-statistic:  1264 on 7 and 19546 DF,  p-value: < 2.2e-16
 ```
 
-As can be seen, the Adjusted R-squared value is low (we estimate a decent value would be more or less 0.7). The R-squared indicates the percentage of the variance in the dependent variable that the independent variables explain, and thus it is clear this model is not explaining well the isAllNBA variable. Then, we can not make a correct analysis of the coefficients, and try to see which variables are more important.
+As it can be appreciated, the Adjusted R<sup>2</sup> value is low (we estimate a decent value would be around **0.7**).
+The R<sup>2</sup> indicates the percentage of the variance in the dependent variable that the independent variables explain.
+This way it is clear that this model does not explain well the variable `isAllNBA`.
+Therefore, we can not make a correct analysis of the coefficients to see which variables are more important.
 
-![Residual analysis of the bad model](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotBadModel.png "Residual analysis of the bad model")
+<figure style="text-align: center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotBadModel.png" alt="Figure 6: Residual analysis of the bad model">
+	<figcaption style="color: #555555">Figure 6: Residual analysis of the bad model</figcaption>
+</figure>
 
-If we analyze the residuals we obtain the same conclusion: this model does not fit well. We also tried using the ```glm``` function from R to create a more complex model (using binomial or poisson distributions), but neither of those solutions enhanced our results. 
+Analizing the residuals we obtain the same conclusion: this model does not fit well.
+We also tried using the `glm` function from R to create a more complex model, using both binomial and poisson distributions, but neither of those solutions improved our results.
 
-We concluded, then, that this problem is not a linear problem to solve, and that trying to use linear regression to predict if a NBA player is one of the best of each year is not a good idea, as it is a problem that can't be fitted well using a linear approach. We believe, as the AllNBA selection is always subjective and does not need to rely directly on statistics, some players who had merits to be included, just by their numbers, were not included, and that some players with worse numbers got included (maybe because of intangibles, basketball IQ or defense capabilities, which are harder to measure).
+We conclude, then, that this problem is not a linear problem, so trying to use linear regression to predict whether a NBA player is one of the best of each year is not a good idea, as it is virtually impossible to fit well using a linear approach.
+We believe that due to the All-NBA selection being subjective and not relying directly and solely on statistics, some players who had merits to be included (just by their stats) were not included.
+Of course, the other way around also happened, therefore some players with worse numbers got included&mdash;maybe because of intangibles, basketball IQ or defense capabilities, which are harder to measure.
 
-As we still wanted to prove our hypothesis regarding the strength of relationships between our features, we decided to change and create a model using the Minutes feature as the outcome. For this, me make the initial assumption that players that play more play better and make more numbers, and that those with good numbers start playing more. Taking that into account, and after studying which features would help us, we came to the next model:
+As we still wanted to prove our hypothesis regarding the strength of relationships between our features, we decided to change and create a model using the `Minutes` feature as the outcome.
+To do so, we made the initial assumption that players that play more play better and make more numbers, and that those with good numbers start playing more.
+Taking that into account, and after studying which features could help us, we created the next model:
 
 ``` r
 Call:
@@ -327,20 +338,39 @@ Multiple R-squared:  0.9806,	Adjusted R-squared:  0.9806
 F-statistic: 8.998e+04 on 11 and 19543 DF,  p-value: < 2.2e-16
 ```
 
-The results are way better than in the previous model. We included Points, Rebounds, Assists, a negative version of Fouls and Turnovers (even though playing more minutes probably means more chance to make turnovers, we consider it something bad per se and thus include it as negative), and FieldGoalPercentage multiplied by the categorical version of points (either LOW, MEDIUM or HIGH). The R-squared is now almost 1, so we can start to interpret better how our features play a role in minutes played.
+The results are way better than in the previous model.
+We included `Points`, `Rebounds`, `Assists`, a negative version of `Fouls` and `Turnovers`&mdash;even though playing more time probably means more chances to make turnovers, we consider it something bad per se, hence we include it as negative&mdash;and `FieldGoalPercentage` multiplied by the categorical version of points (either `LOW`, `MEDIUM` or `HIGH`).
+The R<sup>2</sup> is now almost **1**, so we can start confidently interpreting how our features play a role in the amount of minutes played.
 
-![Residual analysis of the good model](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotGoodModel.png "Residual analysis of the good model")
+<figure style="text-align: center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotGoodModel.png" alt="Figure 7: Residual analysis of the good model">
+	<figcaption style="color: #555555">Figure 7: Residual analysis of the good model</figcaption>
+</figure>
 
-But first, we wanted to compare the residual plot we made earlier with this new one. While not being perfect, it's clearly more linear than the previous one. Interestingly, two of the three left side outliers correspond to 2015 and 2017 seasons of Russell Westbrook, an all-around star player with great stats and many minutes, but clearly a player that is not perfectly fitted in our model. 
+But first, we wanted to compare the residual plot we made earlier with this new one.
+Even though not being perfect, it is clearly more linear than the previous one.
+Interestingly, two of the three left-side outliers correspond to the seasons of Russell Westbrook from 2015 and 2017, an all-around star player with great stats and many minutes, but clearly a player that is not perfectly fitted in our model. 
 
-All of the coefficients have a really low p-value, which means it is unlikely that we are observing a relationship between Minutes and each other variable due to chance. All the standard errors are pretty low, which means the estimates variance is low. The t values can help us understand if there is really a relationship: there probably is if that values are distant from 0. It is the case for all of them, except maybe for FieldGoalPercentage multiplied by the MEDIUM category of points. Maybe that percentage varies more for that category, and then a proper relationship is not easily generated with respect to the number of minutes. Finally, we wanted to study the F-statistic: the further it is from 0, the most probable it is to indicate a relationship between Minutes and the other variables. As we can see the number is really big, so there's no room for other interpretation.
+All of the coefficients have a really low p-value, which means it is unlikely that we are observing a relationship between `Minutes` and each other variable due to chance.
+All the standard errors are pretty low too, which means the estimate variance is low.
+The t-values can give us some hints about whether there is really a relationship: it does exist if those values are distant from 0.
+It is the case for all of them, except maybe for `FieldGoalPercentage` multiplied by the `MEDIUM` category of points.
+Maybe that percentage varies more for that category specifically, and so a proper relationship is not easily generated with respect to the number of minutes.
+To conclude, we wanted to study the F-statistic: the further it is from 0, the most probable it is to indicate a relationship between `Minutes` and the other variables.
+As we can see the number is really big, so there's no room for other interpretation.
 
-Let's observe now how are the predicted values compared to the real values of minutes:
+Let's observe now how are the predicted values compared to the real values of `Minutes`:
 
-![Predicted values VS Real values](https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictedVSreal.png "Predicted values VS Real values")
+<figure style="text-align: center">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictedVSreal.png" alt="Figure 8: Predicted values vs. Real values">
+	<figcaption style="color: #555555">Figure 8: Predicted values vs. Real values</figcaption>
+</figure>
 
-We obtain good results, indicating this model is valid to try to assess the number of minutes based on the used model.
+We obtain good results, indicating this model is objectively good to assess the number of minutes.
 
+[figure-6]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotBadModel.png  "Figure 6: Residual analysis of the bad model"
+[figure-7]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/residualPlotGoodModel.png "Figure 7: Residual analysis of the good model"
+[figure-8]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictedVSreal.png       "Figure 8: Predicted values vs. Real values"
 
 ### Prediction
 
