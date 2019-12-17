@@ -237,13 +237,16 @@ isAllNBA ~ Points + Rebounds + Assists + Blocks + Steals + Minutes
 
 In the next subsections, we present the algorithms we have used for this machine learning procedure.
 
-#### K-nearest neighbors
+#### K-Nearest Neighbors
 
-The K-nearest neighbors algorithm is one of the most used machine learning techniques for classification. The parameter to be optimized is k, the number of neighbors (nearest from the data to predict) selected in order to try to estimate the class of the data.
+The K-nearest neighbors algorithm is one of the most used machine learning techniques for classification.
+The parameter to optimize is `k`, as the name of the algorithm implies.
+It defines the number of nearest neighbors (to the data to predict) to be selected in order to try estimating the class of the data.
 
-#### Decision tree
+#### Decision Tree
 
-The idea now was to apply a decision tree algorithm to be able to visually get a glance at how this algorithm discriminate between the best players and the rest. In the result section we present a visualization of that tree, and try to interpret it, along with the prediction results.
+The idea now is to apply a decision tree algorithm to visually appreciate how this algorithm discerns between the best players and the rest.
+In the result section we present a visualization of that tree and interpret it along with the prediction results.
 
 #### Random forest
 
