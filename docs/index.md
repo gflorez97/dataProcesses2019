@@ -50,11 +50,17 @@ Regardless of the fact that some positions might have better players than others
 
 ### Previous works: 
 
-- [Bhandari, Colet, Parker, Pines, Pratap, Ramanujam (1997). Advanced Scout: Data Mining and Knowledge Discovery in NBA Data. Data Mining and Knowledge Discovery, 1, pp.121–125.](https://www.cse.unr.edu/~sushil/class/ml/papers/local/nba.pdf)
-- [Goldsberry (2012). CourtVision: New Visual and Spatial Analytics for the NBA. MIT Sloan Sports Analytics Conference](http://www.sloansportsconference.com/wp-content/uploads/2012/02/Goldsberry_Sloan_Submission.pdf)
-- [Mikołajec, Maszczyk, Zając (2013). Game Indicators Determining Sports Performance in the NBA. Journal of Human Kinetics, 37, 145-151](https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf)
-- [Cervone, D’Amour, Bornn, Goldsberry (2014). POINTWISE: Predicting Points and Valuing Decisions in Real Time with NBA Optical Tracking Data. MIT Sloan Sports Analytics Conference](https://pdfs.semanticscholar.org/f4b3/81f4482586dbdd15fc92bee81ce68bcb6898.pdf)
-- [Wang, Zemel (2016). Classifying NBA Offensive Plays Using Neural Networks. MIT Sloan Sports Analytics Conference](http://www.sloansportsconference.com/wp-content/uploads/2016/02/1536-Classifying-NBA-Offensive-Plays-Using-Neural-Networks.pdf)
+- [Bhandari, Colet, Parker, Pines, Pratap, Ramanujam (1997). Advanced Scout: Data Mining and Knowledge Discovery in NBA Data. Data Mining and Knowledge Discovery, 1, pp.121–125.][advanced-scout]
+- [Goldsberry (2012). CourtVision: New Visual and Spatial Analytics for the NBA. MIT Sloan Sports Analytics Conference][visual-spatial-analytics]
+- [Mikołajec, Maszczyk, Zając (2013). Game Indicators Determining Sports Performance in the NBA. Journal of Human Kinetics, 37, 145-151][game-indicators]
+- [Cervone, D’Amour, Bornn, Goldsberry (2014). POINTWISE: Predicting Points and Valuing Decisions in Real Time with NBA Optical Tracking Data. MIT Sloan Sports Analytics Conference][pointwise]
+- [Wang, Zemel (2016). Classifying NBA Offensive Plays Using Neural Networks. MIT Sloan Sports Analytics Conference][classifying-nba]
+
+[advanced-scout]:           https://www.cse.unr.edu/~sushil/class/ml/papers/local/nba.pdf                                                                  "Advanced Scout: Data Mining and Knowledge Discovery in NBA Data"
+[visual-spatial-analytics]: http://www.sloansportsconference.com/wp-content/uploads/2012/02/Goldsberry_Sloan_Submission.pdf                                "CourtVision: New Visual and Spatial Analytics for the NBA"
+[game-indicators]:          https://www.degruyter.com/downloadpdf/j/hukin.2013.37.issue-1/hukin-2013-0035/hukin-2013-0035.pdf                              "Game Indicators Determining Sports Performance in the NBA"
+[pointwise]:                https://pdfs.semanticscholar.org/f4b3/81f4482586dbdd15fc92bee81ce68bcb6898.pdf                                                 "Predicting Points and Valuing Decisions in Real Time with NBA Optical Tracking Data"
+[classifying-nba]:          http://www.sloansportsconference.com/wp-content/uploads/2016/02/1536-Classifying-NBA-Offensive-Plays-Using-Neural-Networks.pdf "Classifying NBA Offensive Plays Using Neural Networks"
 
 ## Exploratory Data Analysis
 
