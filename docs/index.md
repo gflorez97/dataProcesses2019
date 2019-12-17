@@ -16,9 +16,11 @@
 
 ## Abstract
 
-- Succinctly summarizes the importance and findings of the project within the 150 word limit.
-
-...
+This project aims to answer one of the most important questions in the world of NBA statistics: who are the best players at any given time?
+To tackle this problem, we conducted a data driven examination, using a custom dataset based on the most important NBA statistics (points, rebounds, assists&hellip;).
+With the objective of better understanding the data, we present some graphs.
+Afterwards, we tried to assess the strength of the relationships between the variety of features in our dataset, using a statistical approach.
+Finally, we used a machine learning approach to try predicting whether a certain player could be selected as one of the best players in the league.
 
 ## Introduction and Related Work
 
