@@ -70,11 +70,11 @@ This was enough to generate the final dataset we needed.
 
 The generation was not a straightforward process, as it required data wrangling.
 We filtered the All-NBA selections with players either in the first or second All-NBA; pre-processing the datasets was necessary to join both datasets.
-The goal was to obtain in the statistics dataset a new variable `isAllNBA`, which will be the categorical variable on which we based our analysis.
-We selected the columns relevant columns, transforming some of the thoguhtout the process, because we wanted stats to be applied per game and not per season.
+The goal was to obtain a new variable named `isAllNBA`, which is the categorical variable on which we based our analysis.
+We selected the relevant columns, transforming some of them throughout the process, because we wanted stats to be applied per game and not per season.
 To conclude, we omitted the rows that contained `NA` values.
 The reason some stats were not tracked is because, until a certain date, nobody thought they would be useful to create insightful analyses, so some of the stats used were not collected until 1978.
-This was the only solution because the source of all these stats were manual in-game annotations, dating back to 1950, so statistics that were not tracked back then, e.g. the number of blocks, cannot be accurately inferred now.
+This was the only reasonable solution we found, because the source of all these stats was manual in-game annotations, dating back to 1950, so statistics that were not tracked back then, e.g. the number of blocks, cannot be accurately inferred now.
 
 Our [final dataset][dataset] ([raw][dataset-raw]), consists of 19,554 observations with 14 variables.
 A brief description of the variables is found below:
