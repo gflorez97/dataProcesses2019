@@ -95,9 +95,9 @@ A brief description of the variables is found below:
 
 We present below 5 graphics to illustrate our dataset:
 
-<figure align="center">
+<figure style="text-align: center">
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph1.png" alt="Figure 1: Histograms of features">
-	<figcaption style="color: #444444">Figure 1: Histograms of features</figcaption>
+	<figcaption style="color: #555555">Figure 1: Histograms of features</figcaption>
 </figure>
 
 These histograms represent, at first sight, how the features are distributed.
@@ -105,17 +105,17 @@ It is noticeable that `Points`, `Rebounds`, `Assists`, `Blocks`, `Steals` and `T
 The `FieldGoalPercentage` seems to follow a normal distribution with a mean of **0.44** and some obvious outliers in `0` and `1`&mdash;in most cases, associated with players that played just a few minutes in a season, and probably shot a few times and either scored or failed those shots).
 The `Fouls` feature is quite left-skweded, because most players commit between 1 and 2 fouls per game, whereas the `Minutes` feature is distributed more evenly, because the overall amount of key players, role players and occasional players in the league is approximately the same.
 
-<figure align="center">
+<figure style="text-align: center">
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph2.png" alt="Figure 2: 'Points' by 'FieldGoalPercentage', colored by 'Minutes'">
-	<figcaption style="color: #444444">Figure 2: <code>Points</code> by <code>FieldGoalPercentage</code>, colored by <code>Minutes</code></figcaption>
+	<figcaption style="color: #555555">Figure 2: <code>Points</code> by <code>FieldGoalPercentage</code>, colored by <code>Minutes</code></figcaption>
 </figure>
 
 We suspected the players that played more minutes usually scored more.
 This plot confirms it and shows that the `FieldGoalPercentage` tends to the mean when players play a considerable amount of minutes: for players with less than 20 minutes per game (role players or occasional players), the percentage has a higher standard deviation, **0.12** to be precise, than for players with more than 20 minutes per game (**0.05**).
 
-<figure align="center">
+<figure style="text-align: center">
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3.png" alt="Figure 3.1: Missing values in the original dataset">
-	<figcaption style="color: #444444">Figure 3.1: Missing values in the original dataset</figcaption>
+	<figcaption style="color: #555555">Figure 3.1: Missing values in the original dataset</figcaption>
 </figure>
 
 In this graph we obtain the percentage of values which are not available in the original dataset (the one dating back to 1950).
@@ -125,17 +125,17 @@ The undeniable setback is that because we use the `Turnovers` stats, we omit 20%
 But given how rapidly evolve sports&mdash;it is enough to watch a video from a gold medalist from the 1956 Olympics to notice the performance difference&mdash;we believe omitting that amount of observations is not a big deal, all things considered.
 As we already stated, the first valid observation dates back to 1978.
 
-<figure align="center">
+<figure style="text-align: center">
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png" alt="Figure 3.2: Number of missing variables per 'Year'">
-	<figcaption style="color: #444444">Figure 3.2: Number of missing variables per <code>Year</code></figcaption>
+	<figcaption style="color: #555555">Figure 3.2: Number of missing variables per <code>Year</code></figcaption>
 </figure>
 
 In this case, we can observe the years in which the last variables started to appear.
 Until the 70's, the last two features were still not present.
 
-<figure align="center">
+<figure style="text-align: center">
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph4.png" alt="Figure 4: Violin plot of the main features">
-	<figcaption style="color: #444444">Figure 4: Violin plot of the main features</figcaption>
+	<figcaption style="color: #555555">Figure 4: Violin plot of the main features</figcaption>
 </figure>
 
 We decided to generate a violin of what we consider the 4 most important features: `Points`, `Rebounds`, `Assists` and `Minutes`.
@@ -150,9 +150,9 @@ Based on these facts, we supose the better they are the more they play, which re
 This is taken into account positively when selecting whether he is All-NBA or not.
 Of course, as there are many more non-All-NBA than All-NBA, this does not mean that if a player plays more it is more likely to be All-NBA: from the 158 players with 40 or more minutes per game, only 49 (about one third of them) were selected to the All-NBA first or second team.
 
-<figure align="center">
+<figure style="text-align: center">
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph5.png" alt="Figure 5: Density plot of the minutes">
-	<figcaption style="color: #444444">Figure 5: Density plot of the minutes</figcaption>
+	<figcaption style="color: #555555">Figure 5: Density plot of the minutes</figcaption>
 </figure>
 
 Finally, we present a density plot of the minutes per game, to further insist in the fact that All-NBA players play more minutes than non All-NBA players, on average.
