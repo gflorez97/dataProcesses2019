@@ -174,14 +174,16 @@ It just means that players with less than 30 minutes of play time have lower pro
 ## Methods
 
 ### Strength of relationships
- 
-We tried to create a linear model, using the r function ```rm``` to try to assess the strength of relationships in our dataset, related to whether a player is or not one of the 10 best of a year. Using the next formula, we wanted to obtain the model that maximized the R-squared value, as it is a metric of the strength of our model in describing the features, and then to study the significance of each of the features in that model, trying to see which ones are the most important for our variable of interest.
+
+We tried to create a linear model, using the function ```lm```, to try assessing the strength of relationships in our dataset related to whether a player is one of the 10 best of a year.
+Using the next formula, we wanted to obtain the model that maximized the R<sup>2</sup> value, as it is a metric of the strength of our model in describing the features.
+After finding such model, we can study the significance of each of the features in it, to discover which ones are the most important for our variable of interest.
 
 ``` r
-model = lm(isAllNBACuant ~ FEATURES, data=nbaFinalLM)
+model <- lm(isAllNBACuant ~ FEATURES, data = nbaFinalLM)
 ```
 
-We tried several ways, but could not obtain a high R-squared value, even by including all features, squared versions of the features we consider most important, like Minutes and Points, or by transforming our features in categorical features with 3 different states:
+We tried several ways, but could not obtain a high R<sup>2</sup> value, even when including all the features, squared versions of the features we considered most important (e.g. `Minutes` and `Points`), or by transforming continuous features into 3 categorical values:
 
 ``` r
 nbaFinalLM$minutesCuant <- NA
@@ -190,7 +192,7 @@ nbaFinalLM$minutesCuant[ 15 < nbaFinalLM$Minutes & nbaFinalLM$Minutes <= 30] <- 
 nbaFinalLM$minutesCuant[nbaFinalLM$Minutes > 30] <- "HIGH"
 ```
 
-More information can be obtained in the next section, as well as the explanation of why we decided to change the way we are assessing the strength of relationships.
+More information is given in the next section as well as the explanation of why we decided to change the way we are assessing the strength of relationships.
 
 ### Prediction
 
