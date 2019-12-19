@@ -297,7 +297,7 @@ Therefore, we cannot make a correct analysis of the coefficients to see which va
 	<figcaption>Figure 6: Residual analysis of the bad model</figcaption>
 </figure>
 
-Analizing the residuals we obtain the same conclusion: this model does not fit well.
+Analyzing the residuals we obtain the same conclusion: this model does not fit well.
 We also tried using the `glm` function from R to create a more complex model, using both binomial and poisson distributions, but neither of those solutions improved our results.
 
 We conclude, then, that this problem is not a linear problem, so trying to use linear regression to predict whether a NBA player is one of the best of each year is not a good idea, as it is virtually impossible to fit well using a linear approach.
@@ -518,5 +518,5 @@ NBA teams could even use our models in the case of injured players that need a s
 Taking into consideration the accuracy obtained in our models, especially in the prediction section, we can definitely conclude whether a certain player would be one of the best 10 players in the league.
 Despite all those implications, we were unable to find a good model for the strength of relationships section.
 
-We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (e.g. number of followers in social media accounts), participations in All-Star events (dunk contest, three-point contest, skill challenge), etc.
+We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (e.g. number of followers in social media accounts), participation in All-Star events (dunk contest, three-point contest, skill challenge), etc.
 We can also extrapolate our models to other sports, changing the features with the main statistics of those sports, to analyze the best players.
