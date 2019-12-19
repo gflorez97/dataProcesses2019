@@ -433,7 +433,7 @@ In this case, along with the prediction, we wanted to obtain a visual of a tree 
 We obtained the following tree:
 
 <figure>
-	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/kEvolution.png" alt="Figure 10: Decision Tree">
+	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictionTree.png" alt="Figure 10: Decision Tree">
 	<figcaption>Figure 10: Decision Tree</figcaption>
 </figure>
 
@@ -472,8 +472,6 @@ Prediction FALSE TRUE
 ```
 
 There are no major changes between this and the k-nearest neighbor, neither in the accuracy nor in the sensitivity or specificity.
-
-[figure-10]: https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/predictionTree.png "Figure 10: Decision Tree"
 
 #### Random forest
 
