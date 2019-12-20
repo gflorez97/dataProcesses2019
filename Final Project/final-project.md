@@ -516,5 +516,5 @@ NBA teams could even use our models in the case of injured players that need a s
 Taking into consideration the accuracy obtained in our models, especially in the prediction section, we can definitely conclude whether a certain player would be one of the best 10 players in the league.
 Despite all those implications, we were unable to find a good model for the strength of relationships section.
 
-We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (e.g. number of followers in social media accounts), participation in All-Star events (dunk contest, three-point contest, skill challenge), etc.
+We tried to think about suggestions for future research, and we believe including subjective features, such as nationality, popularity (e.g. number of followers in social media accounts), participation in All-Star events (dunk contest, three-point contest, skill challenge), and so on.
 We can also extrapolate our models to other sports, changing the features with the main statistics of those sports, to analyze the best players.
