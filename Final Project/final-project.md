@@ -19,7 +19,7 @@
 This project aims to answer one of the most important questions in the world of NBA statistics: who are the best players at any given time?
 To tackle this problem, we conducted a data driven examination, using a custom dataset based on the most important NBA statistics (points, rebounds, assists&hellip;).
 With the objective of better understanding the data, we present some graphs.
-Afterwards, we tried to assess the strength of the relationships between the variety of features in our dataset, using a statistical approach.
+Afterwards, we tried to assess the strength of relationships between the variety of features in our dataset, using a statistical approach.
 Finally, we used a machine learning approach to try predicting whether a certain player could be selected as one of the best players in the league.
 
 ## Introduction and Related Work
@@ -30,10 +30,10 @@ Nowadays, stats are everywhere.
 They cover most aspects of our life, ranging from rigorous industrial processes to mundane and trivial activities of our routine, enabling us to analyze any situation using numbers.
 One of the topics in which they are widely used and considered very valuable is, of course, sports.
 Especially in American sports, as it has been the norm for many years to gather any statistic that might be useful, hoping to extract knowledge from it.
-The goal is being able to tell how are sports evolving and which young players should be scouted, to try predicting who is going to be the new Jordan, the new Brady or the new Trout.
+The goal is being able to tell how the sports are evolving, which young players should be scouted, and predicting who is going to be the new Jordan, the new Brady or the new Trout.
 
 The selected domain of interest for this project is basketball, and in particular, professional basketball in the United States of America, commonly known with the acronym NBA.
-We have chosen this topic for numerous reasons: we believe it is an interesting domain&mdash;not only for us but for the general public&mdash;the amount of data is constantly increasing as everyday new games are played and more data is collected, and having the power of analyzing all the data properly is becoming an increasingly higher priority for the professional teams.
+We have chosen this topic for numerous reasons: we believe it is an interesting domain&mdash;not only for us but for the general public&mdash;the amount of data is constantly increasing as everyday new games are played and more data is collected, and having the power of analyzing all the data properly is becoming an increasingly higher priority for professional teams.
 On top of that, it is a sport we enjoy watching and we tend to be up-to-date with the different sources of NBA news, therefore we can compare the results of our analysis with our previous knowledge, helping us to better understand the unwritten rules behind this sport; similarly, this topic is explored in the film [Moneyball][moneyball].
 
 We will try answering the following question: _**what makes a player be one of the top 10 best players in the NBA in a particular year?**_
@@ -65,7 +65,7 @@ Regardless of the fact that some positions might have better players than others
 To answer the question of interest, we needed two things: the NBA seasons of the players (e.g. Jordan at age 21, Jordan at age 22 and so on) with their main statistics, and whether that season resulted in a first or second All-NBA selection for that player.
 When we started this project, we proposed using a [Kaggle dataset][kaggle].
 It contains the stats we needed, but it does not contain any feature that allows us to know whether a given player had an All-NBA selection.
-Then, we used the package [`nbaStatR`][nbastatr] of the R programming language to gather&mdash;from the [NBA API][nba-api]&mdash;a dataset with every player who was selected in any All-NBA team.
+Then, we used the R package [`nbaStatR`][nbastatr] to gather&mdash;from the [NBA API][nba-api]&mdash;a dataset with every player who was selected in any All-NBA team.
 This was enough to generate the final dataset that we needed.
 
 The generation was not a straightforward process, as it required data wrangling.
@@ -73,8 +73,8 @@ We filtered the All-NBA selections with players either in the first or second Al
 The goal was to obtain a new variable named `isAllNBA`, which is the categorical variable on which we based our analysis.
 We selected the relevant columns, transforming some of them throughout the process, because we wanted stats to be applied per game and not per season.
 To conclude, we omitted the rows that contained `NA` values.
-The reason some stats were not tracked is because, until a certain date, nobody thought they would be useful to create insightful analyses, so some of the stats used were not collected until 1978.
-This was the only reasonable solution we found, because the source of all these stats was manual in-game annotations, dating back to 1950, so statistics that were not tracked back then, e.g. the number of blocks, cannot be accurately inferred now.
+The reason some stats were not tracked is because, until a certain date, nobody thought they would be useful to create insightful analyses, and as a result some of the stats used were not collected until 1978.
+This was the only reasonable explanation we found, because the source of all these stats was manual in-game annotations, dating back to 1950, so statistics that were not tracked back then, e.g. the number of blocks, cannot be accurately inferred now.
 
 Our [final dataset][dataset] ([raw][dataset-raw]), consists of 19,554 observations with 14 variables.
 A brief description of the variables is found below:
@@ -102,7 +102,7 @@ We present below 5 graphics to illustrate our dataset:
 
 These histograms represent, at first sight, how the features are distributed.
 It is noticeable that `Points`, `Rebounds`, `Assists`, `Blocks`, `Steals` and `Turnovers` are left-skewed distributions, as most players are in the lower-end of all those stats and just the best players in each area outstand peak with the highest values (with the exception of `Turnovers`, which is a negative stat).
-The `FieldGoalPercentage` seems to follow a normal distribution with a mean of **0.44** and some obvious outliers in `0` and `1`&mdash;in most cases, these outliers are probably associated with players that played just a few minutes in a season, and just shot a few times and either scored or failed those shots).
+The `FieldGoalPercentage` seems to follow a normal distribution with a mean of **0.44** and has some obvious outliers in `0` and `1`&mdash;in most cases, these outliers are probably associated with players that played just a few minutes in a season, and just shot a few times and either scored or failed those shots).
 The `Fouls` feature is quite left-skewed, because most players commit between 1 and 2 fouls per game, whereas the `Minutes` feature is distributed more evenly, because the overall amount of key players, role players and occasional players in the league is approximately the same.
 
 <figure>
@@ -123,7 +123,7 @@ The position of the player or whether he was an All-NBA is something that has be
 However, some game stats, like blocks or turnovers, were not computed until recently, hence the impossibility  to use the whole dataset.
 The undeniable setback is that because we use the `Turnovers` stats, we omit 20% of the players in the history of NBA.
 But given how rapidly evolve sports&mdash;it is enough to watch a video from a gold medalist of the 1956 Olympics to notice the performance difference&mdash;we believe that omitting this amount of observations is not a big deal, all things considered.
-As we already stated, the first valid observation dates back to 1978.
+As we already stated, the first valid observation in our study dates back to 1978.
 
 <figure>
 	<img src="https://raw.githubusercontent.com/gflorez97/dataProcesses2019/master/Final%20Project/images/graph3_2.png" alt="Figure 3.2: Number of missing variables per 'Year'">
@@ -288,7 +288,7 @@ F-statistic:  1264 on 7 and 19546 DF,  p-value: < 2.2e-16
 ```
 
 As it can be appreciated, the Adjusted R<sup>2</sup> value is low (we estimate a decent value would be around **0.7**).
-The R<sup>2</sup> indicates the percentage of the variance in the dependent variable that the independent variables explain.
+The R<sup>2</sup> indicates the percentage of the variance in the dependent variable explained by the independent variables.
 This way it is clear that this model does not explain well the variable `isAllNBA`.
 Therefore, we cannot make a correct analysis of the coefficients to see which variables are more important.
 
